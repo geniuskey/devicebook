@@ -609,7 +609,7 @@ canvas.drag:active { cursor: grabbing; }
       label(ctx, "E_c", xr - 2, Y(EcB) - 9, P.ec, "right", "middle", 11, true);
       label(ctx, "E_v", xr - 2, Y(EcB - EG) + 10, P.ev, "right", "middle", 11, true);
       label(ctx, "E_F", xr - 2, Y(EfS) + 10, P.ef, "right", "middle", 11, true);
-      label(ctx, st.type + "-Si", xs0 + 10, Y(EcB - EG) + 22, P.text, "left", "middle", 13, true);
+      label(ctx, st.type + "-Si", (xs0 + xr) / 2, Y(EcB - EG) + 24, P.text, "center", "middle", 13, true);
       arrowV(ctx, xr - 54, Y(EcB), Y(EcB + CHI), P.accent2, "χ", "l");
       arrowV(ctx, xr - 30, Y(EfS), Y(EcB + CHI), P.accent, "φs", "l");
       // 페르미 준위 차 (도선 없음)
