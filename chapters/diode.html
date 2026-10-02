@@ -45,7 +45,8 @@
 .stepper { border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-elev); overflow: hidden; }
 .stepper .sv { background: var(--canvas-bg); }
 .stepper .sv canvas { display: block; width: 100%; }
-.stepper .sc { padding: 14px 16px; display: grid; gap: 10px; border-top: 1px solid var(--border); }
+.stepper .sc { padding: 14px 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; border-top: 1px solid var(--border); }
+.stepper .step-desc { overflow-x: auto; }
 .stepper .step-desc .katex-display { margin: 6px 0; }
 .stepper .pills { display: flex; flex-wrap: wrap; gap: 4px; }
 .stepper .pills button { font: inherit; font-size: 12.5px; border: 1px solid var(--border); background: var(--surface); color: var(--text-dim); border-radius: 999px; padding: 3px 10px; cursor: pointer; }
@@ -135,10 +136,10 @@
       <div class="sim-readout">
         <div class="stat"><span class="k">접합면에서 E<sub>Fn</sub> − E<sub>Fp</sub></span><span class="v" id="qf-sp">—</span></div>
         <div class="stat"><span class="k">p(x<sub>n</sub>): 수치 / 법칙</span><span class="v" id="qf-pn">—</span></div>
-        <div class="stat"><span class="k">J: 수치 / 쇼클리</span><span class="v" id="qf-j">—</span></div>
+        <div class="stat"><span class="k">J: 수치 / 쇼클리(확산만)</span><span class="v" id="qf-j">—</span></div>
         <div class="stat"><span class="k">L<sub>n</sub> / L<sub>p</sub></span><span class="v" id="qf-l">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 순방향 0.5 V: 위 그림에서 E<sub>Fn</sub>(파랑 점선)과 E<sub>Fp</sub>(빨강 점선)가 공핍층을 평평하게 지나며 0.5 eV 벌어져 있다. 중성 영역으로 들어가면 소수 캐리어 쪽 준위가 휘어 다수 쪽 준위로 합쳐진다 — 소수 캐리어가 재결합으로 사라지는 구간이고 그 길이가 확산 길이다. ② 아래 그림의 주황 점(접합의 법칙)이 수치 해의 공핍층 가장자리 값과 맞는다. ③ 수명을 1 µs로 늘리면 확산 길이가 영역 폭(10 µm)보다 길어져 소수 캐리어가 거의 직선으로 줄어든다(짧은 다이오드). ④ 역바이어스: 가장자리 소수 캐리어가 평형값보다 훨씬 작아지고 준위 순서가 뒤집힌다(E<sub>Fn</sub> &lt; E<sub>Fp</sub>). ⑤ 0.8 V 이상: n쪽 소수 정공이 10¹⁶에 다가가 고주입이 시작되고, 법칙에서 벗어난다.</div>
+      <div class="sim-note">해볼 것: ① 순방향 0.5 V: 위 그림에서 E<sub>Fn</sub>(파랑 점선)과 E<sub>Fp</sub>(빨강 점선)가 공핍층을 평평하게 지나며 0.5 eV 벌어져 있다. 중성 영역으로 들어가면 소수 캐리어 쪽 준위가 휘어 다수 쪽 준위로 합쳐진다 — 소수 캐리어가 재결합으로 사라지는 구간이고 그 길이가 확산 길이다. ② 아래 그림의 주황 점(접합의 법칙)이 수치 해의 공핍층 가장자리 값과 맞는다. ③ 수명을 1 µs로 늘리면 확산 길이가 영역 폭(10 µm)보다 길어져 소수 캐리어가 거의 직선으로 줄어든다(짧은 다이오드). ④ 역바이어스: 가장자리 소수 캐리어가 평형값보다 훨씬 작아지고 준위 순서가 뒤집힌다(E<sub>Fn</sub> &lt; E<sub>Fp</sub>). ⑤ 0.8 V 이상: n쪽 소수 정공이 10¹⁶에 다가가 고주입이 시작되고, 법칙에서 벗어난다. ⑥ 수명 10 ns에서는 수치 해의 전류가 쇼클리 값보다 크다. 수치 해에는 공핍층 재결합 전류(다음 절)까지 들어 있기 때문이다.</div>
     </div>
   </section>
 
@@ -162,7 +163,7 @@
         </div>
       </div>
       <div class="sim-readout">
-        <div class="stat"><span class="k">L<sub>p</sub> / W<sub>n</sub>/L<sub>p</sub></span><span class="v" id="ls-l">—</span></div>
+        <div class="stat"><span class="k">확산 길이 L<sub>p</sub></span><span class="v" id="ls-l">—</span></div>
         <div class="stat"><span class="k">Δp(x<sub>n</sub>)</span><span class="v" id="ls-p0">—</span></div>
         <div class="stat"><span class="k">J<sub>p</sub> (긴 다이오드 대비)</span><span class="v" id="ls-j">—</span></div>
         <div class="stat"><span class="k">접촉 도달 비율: 이론 / 입자</span><span class="v" id="ls-f">—</span></div>
@@ -218,7 +219,7 @@
     <div class="sim" id="sim-iv">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>다이오드 I–V 실험실: 성분 분해, 직렬 저항, 온도, 수치 해</h3></div>
       <div class="sim-body side">
-        <div class="sim-view"><canvas id="iv-cv"></canvas><span class="hint" style="top:8px;bottom:auto">그래프를 끌어 커서 이동</span></div>
+        <div class="sim-view"><canvas id="iv-cv"></canvas><span class="hint" style="bottom:52px">그래프를 끌어 커서 이동</span></div>
         <div class="sim-controls">
           <div class="ctrl"><span>눈금</span><div class="seg" id="iv-sc"><button data-value="log" class="on">log |I|</button><button data-value="lin">선형 I</button></div></div>
           <label class="ctrl"><span><span>n쪽 도핑 N<sub>D</sub></span> <output id="iv-nd-out"></output></span><input type="range" id="iv-nd" min="15" max="17" step="0.1" value="16"></label>
@@ -295,7 +296,7 @@
     <div class="sim" id="sim-bd">
       <div class="sim-head"><span class="sim-tag">ANIMATION</span><h3>충돌 이온화의 사태 vs 띠 사이 터널링</h3></div>
       <div class="sim-body side">
-        <div class="sim-view"><canvas id="bd-cv"></canvas><span class="hint" style="top:8px;bottom:auto">아래 그래프의 점을 끌어 도핑 변경</span></div>
+        <div class="sim-view"><canvas id="bd-cv"></canvas></div>
         <div class="sim-controls">
           <label class="ctrl"><span><span>가벼운 쪽 도핑 N<sub>B</sub></span> <output id="bd-n-out"></output></span><input type="range" id="bd-n" min="14" max="18.5" step="0.05" value="16"></label>
           <label class="ctrl"><span><span>역바이어스 V<sub>R</sub> / BV</span> <output id="bd-f-out"></output></span><input type="range" id="bd-f" min="0" max="0.99" step="0.01" value="0.85"></label>
@@ -391,6 +392,7 @@
   var fmtN = function (v) { return SC.sci(exp10(v), 2) + " cm⁻³"; };
   var fmtV = function (v) { return (v > 0 ? "+" : "") + v.toFixed(2) + " V"; };
   function small(v, u) { return v + "<small>" + u + "</small>"; }
+  function numH(v) { var a = Math.abs(v); return a >= 0.01 && a < 1000 ? String(Number(v.toPrecision(3))) : SC.sciH(v, 2); }
   function siH(x, u) { var s = PB.si(x, u); var k = s.lastIndexOf(" "); return s.slice(0, k) + "<small>" + s.slice(k) + "</small>"; }
   function silentRange(el, v, txt) {
     el.value = v; var pct = ((v - Number(el.min)) / (Number(el.max) - Number(el.min))) * 100;
@@ -445,8 +447,8 @@
     function readout() {
       var V = gV(), r = Math.exp(V / Vt);
       PB.stat("br-b", small((Vbi - V).toFixed(3), " eV"));
-      PB.stat("br-r1", SC.sciH(r, 2) + " : 1");
-      PB.stat("br-j", (r - 1 >= 0 ? "" : "−") + SC.sciH(Math.abs(r - 1), 2));
+      PB.stat("br-r1", numH(r) + " : 1");
+      PB.stat("br-j", Math.abs(r - 1) < 1e-6 ? "0" : (r - 1 >= 0 ? "" : "−") + numH(Math.abs(r - 1)));
     }
     readout();
     function G(w, h, V) {
@@ -498,8 +500,8 @@
       });
       fx.forEach(function (f) { flash(ctx, g.X(f.x), f.y, f.t / 0.5, P.warn); });
       // 흐름 막대 (로그)
-      var by = g.bot + 22, bh = (h - by - 10) / 3, lab = Math.min(150, w * 0.32), bx0 = g.L + lab, bw = g.R - bx0 - 70;
-      var rD = Math.exp(V / Vt), rows = [["확산 (넘기) ∝ e^{V/Vt}", rD, P.accent], ["드리프트 (내려오기)", 1, P.accent2], ["순 전류 ∝ e^{V/Vt} − 1", rD - 1, P.warn]];
+      var by = g.bot + 22, bh = (h - by - 10) / 3, lab = w < 520 ? 72 : 150, bx0 = g.L + lab, bw = g.R - bx0 - 70;
+      var rD = Math.exp(V / Vt), nar = w < 520, rows = [[nar ? "확산(넘기)" : "확산 (넘기) ∝ e^(V/Vt)", rD, P.accent], [nar ? "드리프트" : "드리프트 (내려오기)", 1, P.accent2], [nar ? "순 전류" : "순 전류 ∝ e^(V/Vt) − 1", rD - 1, P.warn]];
       var Lm = function (v) { return PB.clamp((Math.log10(Math.max(Math.abs(v), 1e-8)) + 8) / 16, 0, 1); };
       ctx.font = PB.font(11); ctx.textBaseline = "middle";
       rows.forEach(function (r, i) {
@@ -508,7 +510,7 @@
         ctx.fillStyle = P.surface; ctx.fillRect(bx0, yy - 7, bw, 14);
         ctx.fillStyle = r[2]; ctx.fillRect(bx0, yy - 7, bw * Lm(r[1]), 14);
         ctx.fillStyle = P.text; ctx.textAlign = "left"; ctx.font = PB.font(11, true);
-        ctx.fillText((r[1] < 0 ? "−" : "") + SC.sci(Math.abs(r[1]), 2), bx0 + bw + 6, yy); ctx.font = PB.font(11);
+        ctx.fillText(Math.abs(r[1]) < 1e-9 ? "0" : (r[1] < 0 ? "−" : "") + (Math.abs(r[1]) >= 0.01 && Math.abs(r[1]) < 1000 ? String(Number(Math.abs(r[1]).toPrecision(3))) : SC.sci(Math.abs(r[1]), 2)), bx0 + bw + 6, yy); ctx.font = PB.font(11);
       });
       ctx.strokeStyle = P.faint; ctx.setLineDash([2, 3]); var x1 = bx0 + bw * 0.5; ctx.beginPath(); ctx.moveTo(x1, by); ctx.lineTo(x1, h - 8); ctx.stroke(); ctx.setLineDash([]);
       ctx.fillStyle = P.faint; ctx.textAlign = "center"; ctx.font = PB.font(10, true); ctx.textBaseline = "top"; ctx.fillText("1 (평형)", x1, h - 12);
@@ -581,8 +583,8 @@
   /* ================================================== 3. 긴/짧은 다이오드 무작위 걸음 */
   (function () {
     var ND = 1e16, Dp = SC.diff(SC.mobility("Si", ND, 300, "p")), pn0 = (ni * ni) / ND;
-    var el = $("ls-cv"), parts = [], fx = [], nRec = 0, nCon = 0, geo = null, rnd = Math.random;
-    var reset = function () { parts = []; fx = []; nRec = 0; nCon = 0; };
+    var el = $("ls-cv"), parts = [], fx = [], nRec = 0, nCon = 0, eRec = 0, eCon = 0, tRun = 0, geo = null;
+    var reset = function () { parts = []; fx = []; nRec = 0; nCon = 0; eRec = 0; eCon = 0; tRun = 0; };
     var gW = PB.range("ls-w", function (v) { return Math.pow(10, v).toPrecision(3) + " µm"; }, function () { reset(); });
     var gT = PB.range("ls-t", function (v) { return PB.si(exp10(v), "s"); }, function () { reset(); });
     var gV = PB.range("ls-v", fmtV, function () { cv.redraw(); });
@@ -624,11 +626,11 @@
       ctx.fillText("점선: 긴 다이오드 e^(−x/L_p) · 점점선: 짧은 다이오드 직선", ch.box.x + ch.box.w - 4, ch.box.y + 4);
       // 읽기값
       var dp0 = pn0 * (Math.exp(V / Vt) - 1), Jlong = (q * Dp * dp0) / p.Lp, coth = 1 / Math.tanh(1 / p.l);
-      PB.stat("ls-l", (p.Lp * 1e4).toPrecision(3) + "<small> µm</small> / " + (1 / p.l).toPrecision(3));
+      PB.stat("ls-l", (p.Lp * 1e4).toPrecision(3) + "<small> µm (W/L = " + (1 / p.l).toPrecision(3) + ")</small>");
       PB.stat("ls-p0", SC.sciH(dp0, 2) + "<small> cm⁻³</small>");
       PB.stat("ls-j", SC.sciH(Jlong * coth, 2) + "<small> A/cm² (×" + coth.toPrecision(3) + ")</small>");
-      var th = 1 / Math.cosh(Math.min(1 / p.l, 700)), tot = nRec + nCon;
-      PB.stat("ls-f", (th * 100).toPrecision(3) + "% / " + (tot > 20 ? ((nCon / tot) * 100).toPrecision(3) + "%" : "…"));
+      var th = 1 / Math.cosh(Math.min(1 / p.l, 700)), tot = eRec + eCon;
+      PB.stat("ls-f", (th * 100).toPrecision(3) + "% / " + (tRun > 3 && tot > 0 ? ((eCon / tot) * 100).toPrecision(3) + "%" : "…"));
     }, { aspect: 0.72, minHeight: 380, maxHeight: 500 });
     PB.loop(el, function (dt) {
       var p = prm(), sub = 3, h = dt / sub, sd = Math.sqrt(2 * p.Dv * h), bw = Math.min(0.03, p.lam / 5);
@@ -646,6 +648,9 @@
         }
         parts = keep;
       }
+      // 접촉 도달 비율: 지수 이동 평균 (초기 과도 상태를 서서히 잊는다)
+      var k = Math.min(1, dt / 6); tRun += dt;
+      eRec = eRec * (1 - k) + nRec; eCon = eCon * (1 - k) + nCon; nRec = 0; nCon = 0;
       fx.forEach(function (f) { f.t += dt; }); fx = fx.filter(function (f) { return f.t < 0.45; });
       cv.redraw();
     });
@@ -676,14 +681,15 @@
       if (step === 2) bands.push({ x0: -4, x1: xl, color: PB.color("accent-2-soft") }, { x0: xr, x1: 4, color: PB.color("accent-2-soft") });
       var ser = [{ data: [[-4, NA], [xl, NA]], color: P.h, width: 2 }, { data: [[xr, ND], [4, ND]], color: P.e, width: 2 },
         { data: [[-4, np0], [xl, np0]], color: P.e, width: 1.2, dash: [3, 3] }, { data: [[xr, pn0], [4, pn0]], color: P.h, width: 1.2, dash: [3, 3] }];
-      var prof = function (side) { var o = []; for (var k = 0; k <= 120; k++) { var d = (3.5 * k) / 120; if (side === "n") o.push([xr + d, pn0 + pn0 * (ev - 1) * Math.exp(-d / 1.1)]); else o.push([xl - d, np0 + np0 * (ev - 1) * Math.exp(-d / 1.1)]); } return o; };
+      var prof = function (side) { var o = []; for (var k = 0; k <= 120; k++) { var d = (3.5 * k) / 120; if (side === "n") o.push([xr + d, pn0 + pn0 * (ev - 1) * Math.exp(-d / 0.6)]); else o.push([xl - d, np0 + np0 * (ev - 1) * Math.exp(-d / 0.6)]); } return o; };
       if (step >= 3) { ser.push({ data: prof("n"), color: P.h, width: 2.6 }); ser.push({ data: prof("p"), color: P.e, width: 2.6 }); }
       var pts = step >= 1 ? [{ x: xr, y: pn0 * ev, color: P.warn, r: 5 }, { x: xl, y: np0 * ev, color: P.warn, r: 5 }] : [];
       var c1 = PB.chart(ctx, b1, { x: [-4, 4], y: [1e2, 1e18], logY: true, yLabel: "농도 (cm⁻³)", xFmt: function () { return ""; }, yTicks: [1e3, 1e7, 1e11, 1e15], yFmt: function (v) { return SC.sci(v, 1); }, bands: bands, series: ser, points: pts });
       ctx.font = PB.font(11, false, 700); ctx.textBaseline = "bottom"; ctx.textAlign = "center";
-      ctx.fillStyle = P.h; ctx.fillText("p 중성 (p = N_A)", c1.X(-2.3), c1.box.y - 4);
-      ctx.fillStyle = P.dim; ctx.fillText("공핍층", c1.X(0), c1.box.y - 4);
-      ctx.fillStyle = P.e; ctx.fillText("n 중성 (n = N_D)", c1.X(2.3), c1.box.y - 4);
+      var nar = w < 520;
+      ctx.fillStyle = P.h; ctx.fillText(nar ? "p 중성" : "p 중성 (p = N_A)", c1.X(-2.3), c1.box.y - 4);
+      ctx.fillStyle = P.dim; ctx.fillText(nar ? "공핍" : "공핍층", c1.X(0), c1.box.y - 4);
+      ctx.fillStyle = P.e; ctx.fillText(nar ? "n 중성" : "n 중성 (n = N_D)", c1.X(2.3), c1.box.y - 4);
       ctx.font = PB.font(11); ctx.textBaseline = "top";
       ctx.fillStyle = P.e; ctx.textAlign = "left"; ctx.fillText("n_p0", c1.box.x + 3, c1.Y(np0) + 2);
       ctx.fillStyle = P.h; ctx.textAlign = "right"; ctx.fillText("p_n0", c1.box.x + c1.box.w - 3, c1.Y(pn0) + 2);
@@ -696,16 +702,16 @@
       if (step === 4 || step === 5 || step === 6) {
         // 가장자리 접선
         ctx.strokeStyle = P.accent; ctx.lineWidth = 1.6; ctx.setLineDash([5, 3]);
-        var yA = pn0 * ev; ctx.beginPath(); ctx.moveTo(c1.X(xr), c1.Y(yA)); ctx.lineTo(c1.X(xr + 1.1), c1.Y(yA / Math.E)); ctx.stroke();
-        var yB = np0 * ev; ctx.beginPath(); ctx.moveTo(c1.X(xl), c1.Y(yB)); ctx.lineTo(c1.X(xl - 1.1), c1.Y(yB / Math.E)); ctx.stroke(); ctx.setLineDash([]);
+        var yA = pn0 * ev; ctx.beginPath(); ctx.moveTo(c1.X(xr), c1.Y(yA)); ctx.lineTo(c1.X(xr + 0.6), c1.Y(yA / Math.E)); ctx.stroke();
+        var yB = np0 * ev; ctx.beginPath(); ctx.moveTo(c1.X(xl), c1.Y(yB)); ctx.lineTo(c1.X(xl - 0.6), c1.Y(yB / Math.E)); ctx.stroke(); ctx.setLineDash([]);
       }
       // 전류 성분 (J/J_total)
       var cs = [], jn = [], jp = [], jt = [];
       if (step >= 4) {
         for (var k = 0; k <= 160; k++) {
           var x = -4 + (8 * k) / 160, Jp, Jn;
-          if (x >= xr) { Jp = Jp0 * Math.exp(-(x - xr) / 1.1); Jn = Jt - Jp; }
-          else if (x <= xl) { Jn = Jn0 * Math.exp((x - xl) / 1.1); Jp = Jt - Jn; }
+          if (x >= xr) { Jp = Jp0 * Math.exp(-(x - xr) / 0.6); Jn = Jt - Jp; }
+          else if (x <= xl) { Jn = Jn0 * Math.exp((x - xl) / 0.6); Jp = Jt - Jn; }
           else { Jp = Jp0; Jn = Jn0; }
           if (step === 4) { if (x >= xr) jp.push([x, Jp / Jt]); if (x <= xl) jn.push([x, Jn / Jt]); }
           else { jp.push([x, Jp / Jt]); jn.push([x, Jn / Jt]); jt.push([x, 1]); }
@@ -713,17 +719,17 @@
         cs.push({ data: jp, color: P.h, width: 2.4 }, { data: jn, color: P.e, width: 2.4 });
         if (step === 6) cs.push({ data: jt, color: P.accent, width: 3 });
       }
-      var c2 = PB.chart(ctx, b2, { x: [-4, 4], y: [0, 1.15], yLabel: "J / J_total", xLabel: "위치 (개략: 각 중성 영역 ≈ 3L)", xFmt: function () { return ""; }, bands: [{ x0: xl, x1: xr, color: PB.color("accent-soft") }], series: cs });
+      var c2 = PB.chart(ctx, b2, { x: [-4, 4], y: [0, 1.15], yLabel: "J / J_total", xLabel: "위치 (개략: 각 중성 영역 ≈ 6L)", xFmt: function () { return ""; }, bands: [{ x0: xl, x1: xr, color: PB.color("accent-soft") }], series: cs });
       ctx.font = PB.font(11, false, 700); ctx.textBaseline = "bottom";
       if (step >= 4) {
-        ctx.fillStyle = P.h; ctx.textAlign = "left"; ctx.fillText("J_p", c2.X(2.6), c2.Y(Jp0 / Jt * Math.exp(-2.1 / 1.1)) - 3);
-        ctx.fillStyle = P.e; ctx.textAlign = "right"; ctx.fillText("J_n", c2.X(-2.6), c2.Y(Jn0 / Jt * Math.exp(-2.1 / 1.1)) - 3);
+        ctx.fillStyle = P.h; ctx.textAlign = "left"; ctx.fillText("J_p", c2.X(1.3), c2.Y(Jp0 / Jt * Math.exp(-0.8 / 0.6)) - 3);
+        ctx.fillStyle = P.e; ctx.textAlign = "right"; ctx.fillText("J_n", c2.X(-1.3), c2.Y(Jn0 / Jt * Math.exp(-0.8 / 0.6)) - 3);
       }
-      if (step >= 5) { ctx.fillStyle = P.h; ctx.textAlign = "left"; ctx.fillText("다수 정공 전류", c2.X(-3.9), c2.Y(1 - Jn0 / Jt * Math.exp(-3.4 / 1.1)) - 3); ctx.fillStyle = P.e; ctx.textAlign = "right"; ctx.fillText("다수 전자 전류", c2.X(3.9), c2.Y(1 - Jp0 / Jt * Math.exp(-3.4 / 1.1)) - 3); }
+      if (step >= 5) { ctx.textBaseline = "middle"; ctx.textAlign = "center"; ctx.fillStyle = P.h; ctx.fillText("다수 정공 전류", c2.X(-2.3), c2.Y(0.5)); ctx.fillStyle = P.e; ctx.fillText("다수 전자 전류", c2.X(2.3), c2.Y(0.5)); ctx.textBaseline = "bottom"; }
       if (step === 6) { ctx.fillStyle = P.accent; ctx.textAlign = "center"; ctx.fillText("J = J_n(−x_p) + J_p(x_n) = 일정", c2.X(0), c2.Y(1) - 4); }
       if (step < 4) { ctx.fillStyle = P.faint; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.font = PB.font(12); ctx.fillText("(⑤ 단계부터 전류 성분이 나타난다)", c2.X(0), c2.Y(0.55)); }
       ctx.fillStyle = P.dim; ctx.font = PB.font(11, true); ctx.textAlign = "right"; ctx.textBaseline = "top";
-      ctx.fillText("V = " + V + " V, N_A=1e17, N_D=1e16", c1.box.x + c1.box.w - 4, c1.box.y + 4);
+      ctx.fillText(nar ? "V = " + V + " V" : "V = " + V + " V, N_A=1e17, N_D=1e16", c1.box.x + c1.box.w - 4, c1.box.y + c1.box.h * 0.55);
     }, { aspect: 0.62, minHeight: 360, maxHeight: 460 });
     go(0);
   })();
@@ -902,8 +908,8 @@
         SC.dot(ctx, X(p.x), y, p.k, 3.6);
       });
       fx.forEach(function (f) { flash(ctx, X(f.x), f.y, f.t / 0.5, P.warn); });
-      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.textBaseline = "top";
-      ctx.fillText("q(V_bi+V_R) = " + (s.VR + 0.9).toPrecision(3) + " eV, E_g = 1.12 eV", X(x1) + 6, Y(s.drop * 0.55));
+      ctx.fillStyle = P.dim; ctx.font = PB.font(11); ctx.textAlign = "left"; ctx.textBaseline = "bottom";
+      ctx.fillText("q(V_bi+V_R) = " + (s.VR + 0.9).toPrecision(3) + " eV ≫ E_g = 1.12 eV", L + 4, bot);
       // BV–N 그래프
       var N4 = 1e16 * Math.pow((4 * EG) / (60 * Math.pow(EG / 1.1, 1.5)), -4 / 3), N6 = 1e16 * Math.pow((6 * EG) / (60 * Math.pow(EG / 1.1, 1.5)), -4 / 3);
       var curve = []; for (var lg = 14; lg <= 18.5; lg += 0.05) curve.push([exp10(lg), BVf(exp10(lg))]);
@@ -912,7 +918,9 @@
         bands: [{ x0: N6, x1: N4, color: PB.color("accent-soft") }, { x0: N4, x1: exp10(18.5), color: PB.color("accent-2-soft") }],
         series: [{ data: curve, color: P.accent, width: 2.4 }], hlines: [{ y: s.VR, color: P.warn, label: "V_R" }],
         points: [{ x: s.N, y: s.BV, color: P.warn, r: 7 }] }));
-      ctx.font = PB.font(11, false, 700); ctx.textBaseline = "top"; ctx.textAlign = "left"; ctx.fillStyle = P.accent; ctx.fillText("사태 (+TC)", bch.box.x + 6, bch.box.y + 4);
+      ctx.font = PB.font(11, false, 700); ctx.textBaseline = "bottom"; ctx.textAlign = "left"; ctx.fillStyle = P.accent; ctx.fillText("사태 (+TC)", bch.box.x + 6, bch.box.y + bch.box.h - 4);
+      ctx.fillStyle = P.warn; ctx.textBaseline = "top"; ctx.textAlign = "left"; ctx.font = PB.font(11); ctx.fillText("● 점을 좌우로 끌어 도핑 변경", PB.clamp(bch.X(s.N) + 10, bch.box.x, bch.box.x + bch.box.w - 170), PB.clamp(bch.Y(s.BV) + 8, bch.box.y, bch.box.y + bch.box.h - 16));
+      ctx.font = PB.font(11, false, 700); ctx.textBaseline = "top";
       ctx.fillStyle = P.accent2; ctx.textAlign = "right"; ctx.fillText("제너 (−TC)", bch.box.x + bch.box.w - 4, bch.box.y + 4);
       // 읽기값
       PB.stat("bd-bv", small(s.BV.toPrecision(3), " V") + " · " + s.mech);
@@ -943,7 +951,7 @@
         var dx = speed * dt * (p.k === "e" ? 1 : -1), xOld = p.x; p.x += dx;
         var inDep = p.x > g.x0 && p.x < g.x1;
         var dE = Math.abs(g.Ec(p.x) - g.Ec(xOld));
-        p.ke = Math.min(p.ke + dE * 40, 26); if (Math.random() < 3 * dt) p.ke *= 0.5;
+        p.ke = Math.min(p.ke + dE * 30, 16); if (Math.random() < 4 * dt) p.ke *= 0.5;
         if (inDep && s.I > 0 && Math.random() < alpha(p.x) * Math.abs(dx) && ps.length + nw.length < 260) {
           nw.push({ k: "e", x: p.x, ke: 0 }, { k: "h", x: p.x, ke: 0 }); p.ke = 0;
           fx.push({ x: p.x, y: g.Y(p.k === "e" ? g.Ec(p.x) : g.Ec(p.x) - EG), t: 0 });
@@ -1021,7 +1029,7 @@
       PB.chart(ctx, bx(0), { x: xr, y: [-Math.max(IR * (answered ? 2 : 1), 1) * 1.15, IF * 1.2], yLabel: "i (mA)", xFmt: function (v) { return String(Math.round(v)); }, series: si, vlines: vl, hlines: [{ y: 0, color: P.faint, dash: [] }] });
       var sq = [{ data: curve(simA, "Q", tau * IF * 1e-3), color: P.accent2, width: 2.4, fill: PB.color("accent-2-soft") }];
       if (answered) sq.unshift({ data: curve(simB, "Q", tau * IF * 1e-3), color: P.dim, width: 1.4, dash: [5, 4] });
-      PB.chart(ctx, bx(1), { x: xr, y: [0, tau * IF * 1e-3 * 1.15], yLabel: "Q (pC)", xLabel: "시간 t (ns), t = 0에 역방향 전환", xFmt: function (v) { return String(Math.round(v)); }, series: sq, vlines: vl.slice(0, 2) });
+      PB.chart(ctx, bx(1), { x: xr, y: [0, tau * IF * 1e-3 * 1.15], yLabel: "Q (nC)", xLabel: "시간 t (ns), t = 0에 역방향 전환", xFmt: function (v) { return String(Math.round(v)); }, series: sq, vlines: vl.slice(0, 2) });
       // 분포
       var prof;
       if (tc <= 0) prof = null; else { var k = Math.min(simA.prof.length - 1, Math.round(tc / simA.profDt)); prof = simA.prof[k]; }
