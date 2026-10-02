@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://devicebook.euiyun.com/sitemap.xml
