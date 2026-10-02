@@ -476,10 +476,16 @@
         Jn[i] = ((q * Dn) / hx) * (n[i + 1] * bern(dP) - n[i] * bern(-dP));
         Jp[i] = ((q * Dp) / hx) * (p[i] * bern(dP) - p[i + 1] * bern(-dP));
       }
-      // 총 전류: 가운데 구간 평균 (수치 잡음 완화)
-      let J = 0, cnt = 0;
-      for (let i = Math.floor(Np * 0.1); i < Math.floor(Np * 0.9); i++) { J += Jn[i] + Jp[i]; cnt++; }
-      J /= cnt;
+      // 총 전류: 다수 캐리어 영역의 Jn·Jp는 큰 드리프트·확산 플럭스의 차라 반올림 잡음이 크다.
+      // 그래서 Jn은 n이 가장 작은 변에서, Jp는 p가 가장 작은 변에서 읽고, 연속 방정식
+      // dJp/dx = −q(R−G) 로 Jp를 같은 변으로 옮겨 더한다.
+      let iN = 0, iP = 0;
+      for (let i = 0; i < Np - 1; i++) { if (n[i] + n[i + 1] < n[iN] + n[iN + 1]) iN = i; if (p[i] + p[i + 1] < p[iP] + p[iP + 1]) iP = i; }
+      let integ = 0; // ∫(R−G)dx from edge iP to edge iN (edge k at node k+½)
+      const a0 = Math.min(iN, iP), a1 = Math.max(iN, iP);
+      for (let k = a0 + 1; k <= a1; k++) integ += (R[k] - G[k]) * hx;
+      const JpAtN = Jp[iP] - q * (iN >= iP ? integ : -integ);
+      const J = Jn[iN] + JpAtN;
       return { x, psi, n: Float64Array.from(n), p: Float64Array.from(p), C, Ec, Ev, Ei, Efn, Efp, E, rho, R, Jn, Jp, J, Va, ni, Vt, Eg, iters: self.iters, converged: self.converged };
     };
     self.x = x; self.C = C; self.Np = Np; self.L = L; self.ni = ni; self.Vt = Vt;
@@ -546,7 +552,8 @@
   SC.sci = function (v, d = 2) {
     if (!isFinite(v)) return "—";
     if (v === 0) return "0";
-    const e = Math.floor(Math.log10(Math.abs(v))), mnt = v / Math.pow(10, e);
+    let e = Math.floor(Math.log10(Math.abs(v))), mnt = v / Math.pow(10, e);
+    if (Math.abs(Number(mnt.toPrecision(d))) >= 10) { mnt /= 10; e++; }
     const es = String(e).split("").map((ch) => SUP[ch]).join("");
     const ms = Number(mnt.toPrecision(d));
     return (ms === 1 ? "" : ms + "×") + "10" + es;
@@ -555,7 +562,8 @@
   SC.sciH = function (v, d = 2) {
     if (!isFinite(v)) return "—";
     if (v === 0) return "0";
-    const e = Math.floor(Math.log10(Math.abs(v))), mnt = v / Math.pow(10, e);
+    let e = Math.floor(Math.log10(Math.abs(v))), mnt = v / Math.pow(10, e);
+    if (Math.abs(Number(mnt.toPrecision(d))) >= 10) { mnt /= 10; e++; }
     const ms = Number(mnt.toPrecision(d));
     return (ms === 1 ? "" : ms + "×") + "10<sup>" + e + "</sup>";
   };
