@@ -41,7 +41,7 @@
   const M = (m) => (typeof m === "string" ? SC.MAT[m] : m) || SC.MAT.Si;
   SC.mat = M;
   /** 밴드갭 (eV) */
-  SC.Eg = function (mat, T = 300) { const m = M(mat); return m.Eg0 - (m.a * T * T) / (T + m.b); };
+  SC.Eg = function (mat, T = 300) { const m = M(mat); return T + m.b > 0 ? m.Eg0 - (m.a * T * T) / (T + m.b) : m.Eg0; };
   SC.Nc = (mat, T = 300) => M(mat).Nc * Math.pow(T / 300, 1.5);
   SC.Nv = (mat, T = 300) => M(mat).Nv * Math.pow(T / 300, 1.5);
   /** 진성 캐리어 농도 n_i = √(NcNv)·exp(−Eg/2kT) — Si 300 K ≈ 1.07×10¹⁰ */
@@ -82,7 +82,7 @@
     const NdI = (Ef) => (inc ? Nd / (1 + gD * Math.exp((Ef - (Eg - Ed)) / kT)) : Nd);
     const NaI = (Ef) => (inc ? Na / (1 + gA * Math.exp((Ea - Ef) / kT)) : Na);
     const f = (Ef) => pOf(Ef) + NdI(Ef) - nOf(Ef) - NaI(Ef);
-    let lo = -1.0, hi = Eg + 1.0;
+    let lo = -3.0, hi = Eg + 3.0;
     for (let i = 0; i < 200; i++) { const mid = 0.5 * (lo + hi); if (f(mid) > 0) lo = mid; else hi = mid; }
     const Ef = 0.5 * (lo + hi), ni = SC.ni(mat, T), Ei = Eg / 2 + SC.EiOffset(mat, T);
     return { Ef, EfMid: Ef - Eg / 2, EfEi: Ef - Ei, n: nOf(Ef), p: pOf(Ef), NdIon: NdI(Ef), NaIon: NaI(Ef), Eg, ni, Ei, Ec: Eg, Ev: 0, Nc, Nv, kT };
