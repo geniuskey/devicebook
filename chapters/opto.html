@@ -32,6 +32,7 @@
 <!--head:end-->
 <style>
   .drag-cv { touch-action: none; cursor: crosshair; }
+  .ctrl output { white-space: nowrap; }
   .pred-opts { display: grid; gap: 8px; }
   .pred-opts .btn { text-align: left; }
   .pred-opts .btn.right { border-color: var(--ok); background: color-mix(in srgb, var(--ok) 15%, transparent); font-weight: 600; }
@@ -203,10 +204,10 @@
         <div class="sim-view"><canvas id="pd-cv" class="drag-cv"></canvas></div>
         <div class="sim-controls">
           <div class="ctrl"><span>구조</span><div class="seg" id="pd-s"><button data-value="pn" class="on">p⁺n</button><button data-value="pin">pin</button></div></div>
-          <label class="ctrl"><span>역바이어스 V<sub>R</sub> <output id="pd-v-out"></output></span><input type="range" id="pd-v" min="0" max="20" step="0.5" value="3"></label>
+          <label class="ctrl"><span><span>역바이어스 V<sub>R</sub></span> <output id="pd-v-out"></output></span><input type="range" id="pd-v" min="0" max="20" step="0.5" value="3"></label>
           <label class="ctrl"><span><span>n층 도핑 N<sub>D</sub> (p⁺n)</span> <output id="pd-n-out"></output></span><input type="range" id="pd-n" min="13" max="17" step="0.1" value="15"></label>
           <label class="ctrl"><span><span>i층 두께 (pin)</span> <output id="pd-i-out"></output></span><input type="range" id="pd-i" min="2" max="80" step="1" value="30" disabled></label>
-          <label class="ctrl"><span>표면 p⁺층 깊이 x<sub>j</sub> <output id="pd-xj-out"></output></span><input type="range" id="pd-xj" min="0.03" max="1" step="0.01" value="0.2"></label>
+          <label class="ctrl"><span><span>표면 p⁺층 깊이 x<sub>j</sub></span> <output id="pd-xj-out"></output></span><input type="range" id="pd-xj" min="0.03" max="1" step="0.01" value="0.2"></label>
           <label class="ctrl"><span>기판 확산 길이 L <output id="pd-l-out"></output></span><input type="range" id="pd-l" min="0" max="3" step="0.05" value="1.5"></label>
           <label class="check"><input type="checkbox" id="pd-arc" checked> 반사 방지막 (R ≈ 5%, 없으면 ≈ 33%)</label>
         </div>
@@ -233,12 +234,12 @@
     <figure class="diagram">
       <svg viewBox="0 0 780 220" role="img" aria-label="태양 전지 등가 회로">
         <defs><marker id="op-a6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--text)"/></marker></defs>
-        <path d="M120 40 H560 M120 180 H560 M120 40 V80 M120 140 V180 M250 40 V90 M250 130 V180 M370 40 V70 M370 150 V180" class="s-line"/>
+        <path d="M120 40 H560 M120 180 H560 M120 40 V80 M120 140 V180 M250 40 V90 M250 130 V180 M400 40 V70 M400 150 V180" class="s-line"/>
         <circle cx="120" cy="110" r="30" class="f-elev" stroke="var(--text)"/><path d="M120 128 V92" stroke="var(--text)" stroke-width="2" marker-end="url(#op-a6)"/>
         <text x="70" y="114" text-anchor="end" class="lbl-b">J_L</text>
         <path d="M232 90 H268 L250 130 Z" class="f-elev" stroke="var(--text)" stroke-width="1.6"/><path d="M232 130 H268" stroke="var(--text)" stroke-width="1.6"/>
-        <text x="280" y="116" class="lbl">J₀(e^(V/Vt)−1)</text>
-        <rect x="360" y="70" width="20" height="80" class="f-surface" stroke="var(--text)"/><text x="392" y="114" class="lbl">R_sh</text>
+        <text x="250" y="152" text-anchor="middle" class="t-mono">J_D</text><text x="282" y="116" class="lbl-dim">다이오드</text>
+        <rect x="390" y="70" width="20" height="80" class="f-surface" stroke="var(--text)"/><text x="420" y="114" class="lbl">R_sh</text>
         <rect x="430" y="30" width="70" height="20" class="f-surface" stroke="var(--text)"/><text x="465" y="24" text-anchor="middle" class="lbl">R_s</text>
         <path d="M560 40 V80 M560 140 V180" class="s-line"/><rect x="540" y="80" width="40" height="60" rx="6" class="f-acc-soft"/><text x="560" y="115" text-anchor="middle" class="lbl-acc">부하</text>
         <text x="600" y="60" class="lbl-dim">+ V</text><text x="600" y="176" class="lbl-dim">−</text>
@@ -286,7 +287,7 @@
       <div class="sim-body side">
         <div class="sim-view"><canvas id="sq-cv" class="drag-cv"></canvas></div>
         <div class="sim-controls">
-          <label class="ctrl"><span>밴드갭 E<sub>g</sub> (그래프를 끌어도 된다) <output id="sq-e-out"></output></span><input type="range" id="sq-e" min="0.5" max="3" step="0.01" value="1.12"></label>
+          <label class="ctrl"><span><span>밴드갭 E<sub>g</sub> (그래프를 끌어도 된다)</span> <output id="sq-e-out"></output></span><input type="range" id="sq-e" min="0.5" max="3" step="0.01" value="1.12"></label>
           <label class="ctrl"><span>집광 배율 <output id="sq-x-out"></output></span><input type="range" id="sq-x" min="0" max="3" step="0.05" value="0"></label>
         </div>
       </div>
@@ -634,17 +635,18 @@
       // Si 블록
       ctx.fillStyle = P.surface; ctx.fillRect(bA.x, bA.y, bA.w, bA.h);
       ctx.strokeStyle = P.border; ctx.strokeRect(bA.x, bA.y, bA.w, bA.h);
-      label(ctx, mat + " 표면", bA.x + bA.w - 4, bA.y - 9, P.dim, "right", 11, 600);
       // 깊이 눈금
       const step = D > 30 ? 10 : D > 12 ? 5 : D > 5 ? 2 : D > 2.5 ? 1 : 0.5;
       ctx.font = PB.font(10, true); ctx.fillStyle = P.dim; ctx.textAlign = "right"; ctx.textBaseline = "middle";
       for (let z = 0; z <= D + 1e-9; z += step) { const y = Yd(z); ctx.fillText((step < 1 ? z.toFixed(1) : z.toFixed(0)), bA.x - 5, y); ctx.strokeStyle = P.grid; ctx.beginPath(); ctx.moveTo(bA.x, y); ctx.lineTo(bA.x + bA.w, y); ctx.stroke(); }
-      ctx.save(); ctx.translate(12, bA.y + bA.h / 2); ctx.rotate(-Math.PI / 2); label(ctx, "깊이 (µm)", 0, 0, P.dim, "center", 11, 500); ctx.restore();
+      ctx.save(); ctx.translate(12, bA.y + bA.h / 2); ctx.rotate(-Math.PI / 2); label(ctx, mat + " 표면에서의 깊이 (µm)", 0, 0, P.dim, "center", 11, 500); ctx.restore();
       const cw = bA.w / showN;
       for (let i = 0; i < showN; i++) {
         const a = alpha(mat, L[i]) / 1e4, x0 = bA.x + i * cw; // α in 1/µm
         // 세기 감쇠 음영
-        for (let k = 0; k < 40; k++) { const z0 = (D * k) / 40; ctx.fillStyle = PB.wl2rgb(L[i], 0.35 * Math.exp(-a * z0)); ctx.fillRect(x0 + 2, Yd(z0), cw - 4, bA.h / 40 + 1); }
+        const grd = ctx.createLinearGradient(0, bA.y, 0, bA.y + bA.h);
+        for (let k = 0; k <= 10; k++) grd.addColorStop(k / 10, PB.wl2rgb(L[i], 0.38 * Math.exp((-a * D * k) / 10)));
+        ctx.fillStyle = grd; ctx.fillRect(x0 + 2, bA.y, cw - 4, bA.h);
         if (answered) {
           const dd = 1 / a;
           if (dd <= D) { ctx.strokeStyle = P.text; ctx.setLineDash([4, 3]); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(x0 + 3, Yd(dd)); ctx.lineTo(x0 + cw - 3, Yd(dd)); ctx.stroke(); ctx.setLineDash([]); label(ctx, "1/α " + depthFmt(dd * 1e-4), x0 + cw / 2, Yd(dd) + 10, P.text, "center", 10, 600); }
@@ -779,7 +781,7 @@
       const box = { x: 58, y: 16, w: w - 112, h: hh - 62 };
       lay = box;
       const jmax = Math.max(0.045, C.Jsc * 1.15), vmax = 0.8;
-      const pmax = Math.max(C.Pm * 1.25, 1e-4);
+      const pmax = Math.max(Math.ceil((C.Pm * 1.25 * 1000) / 4) * 4, 4) / 1000;
       const ch = PB.chart(ctx, box, { x: [0, vmax], y: [0, jmax * 1000], xLabel: "전압 V (V)", yLabel: "전류 밀도 J (mA/cm²)", series: [] });
       // V_oc·J_sc 사각형, 출력 사각형
       ctx.strokeStyle = P.accent2; ctx.setLineDash([5, 4]); ctx.lineWidth = 1.2; ctx.strokeRect(ch.X(0), ch.Y(C.Jsc * 1000), ch.X(C.Voc) - ch.X(0), ch.Y(0) - ch.Y(C.Jsc * 1000)); ctx.setLineDash([]);
@@ -851,7 +853,7 @@
       for (let Eg = 0.4; Eg <= 3.0001; Eg += 0.01) { curve.push([Eg, sq(Eg, X).eta * 100]); curve1.push([Eg, sq(Eg, 1).eta * 100]); }
     }
     build();
-    const MK = [["Ge", 0.66], ["Si", 1.12], ["GaAs", 1.42], ["CdTe", 1.5], ["페로브스카이트", 1.6], ["a-Si", 1.75], ["GaInP", 1.85]];
+    const MK = [["Ge", 0.66, 1], ["Si", 1.12, 1], ["GaAs", 1.42, 1], ["페로브스카이트", 1.6, -1], ["GaInP", 1.85, 1]];
     cv = PB.canvas(el, (ctx, w, hh) => {
       const P = PB.palette(), Eg = gE(), X = Math.pow(10, gX()), r = sq(Eg, X);
       const b1 = { x: 52, y: 14, w: w - 70, h: hh * 0.46 - 44 };
@@ -862,7 +864,7 @@
       const ch1 = PB.chart(ctx, b1, { x: [0.4, 3.0], y: [0, ymax], xLabel: "", yLabel: "효율 한계 (%)",
         series: (X > 1.01 ? [{ data: curve1, color: P.faint, width: 1.4, dash: [5, 4] }] : []).concat([{ data: curve, color: P.accent, width: 3 }]),
         vlines: [{ x: Eg, color: P.text, dash: [3, 3] }], points: [{ x: Eg, y: r.eta * 100, color: P.accent, r: 6, label: (r.eta * 100).toFixed(1) + "%" }] });
-      MK.forEach((m, i) => { const x = ch1.X(m[1]), y = ch1.Y(sq(m[1], X).eta * 100); ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(x, y, 3, 0, 7); ctx.fill(); label(ctx, m[0], x, y + (i % 2 ? -12 : 14) , P.dim, "center", 10, 600); });
+      MK.forEach((m, i) => { const x = ch1.X(m[1]), y = ch1.Y(sq(m[1], X).eta * 100); ctx.fillStyle = P.text; ctx.beginPath(); ctx.arc(x, y, 3, 0, 7); ctx.fill(); label(ctx, m[0], x, y + m[2] * 14, P.dim, "center", 10, 600); });
       // 태양 전력 스펙트럼과 손실
       let pm = 0; const sp = [];
       for (let E = 0.3; E <= 4.0; E += 0.01) { const v = E * bb(E, 5778) * sc * q; sp.push([E, v]); pm = Math.max(pm, v); }
@@ -1013,8 +1015,8 @@
       const P = PB.palette(), p = params(), I = gI();
       const W2 = wide(el, 600);
       const b1 = W2 ? { x: 54, y: 16, w: w * 0.52 - 64, h: hh - 62 } : { x: 54, y: 16, w: w - 70, h: hh * 0.5 - 56 };
-      const b2 = W2 ? { x: w * 0.52 + 40, y: 16, w: w * 0.48 - 56, h: hh * 0.58 - 48 } : { x: 54, y: hh * 0.5 + 12, w: w - 70, h: hh * 0.3 - 46 };
-      const b3 = W2 ? { x: w * 0.52 + 40, y: hh * 0.58 + 22, w: w * 0.48 - 56, h: hh * 0.42 - 40 } : { x: 54, y: hh * 0.8 + 6, w: w - 70, h: hh * 0.2 - 16 };
+      const b2 = W2 ? { x: w * 0.52 + 40, y: 16, w: w * 0.48 - 56, h: hh * 0.58 - 48 } : { x: 54, y: hh * 0.5 + 12, w: w - 70, h: hh * 0.3 - 58 };
+      const b3 = W2 ? { x: w * 0.52 + 40, y: hh * 0.58 + 22, w: w * 0.48 - 56, h: hh * 0.42 - 40 } : { x: 54, y: hh * 0.8 + 14, w: w - 70, h: hh * 0.2 - 22 };
       lay = b1;
       const li = []; let pm = 1;
       for (let i = 0; i <= Imax; i += 0.25) { const r = Pout(i, p); li.push([i, r.P + r.Psp]); pm = Math.max(pm, r.P + r.Psp); }
@@ -1023,8 +1025,8 @@
         vlines: [{ x: Ith, color: P.bad, label: "I_th", dash: [5, 4] }], points: [{ x: I, y: r0.P + r0.Psp, color: on ? P.ok : P.warn, r: 7 }] });
       // 스펙트럼
       const kT = kBeV * p.T, lamL = 1239.84 / p.hv, span = 45;
-      const nth = (() => { let lo = 1e17, hi = 2e19; for (let i = 0; i < 60; i++) { const m = Math.sqrt(lo * hi); if (dEF(m, p.T) < 0.04) lo = m; else hi = m; } return Math.sqrt(lo * hi); })();
-      const n = nth * Math.min(1, Math.pow(Math.max(I, 1e-3) / r0.Ith, 0.6));
+      const nth = (() => { let lo = 1e17, hi = 2e19; for (let i = 0; i < 60; i++) { const m = Math.sqrt(lo * hi); if (dEF(m, p.T) < p.hv - p.Eg + 0.01) lo = m; else hi = m; } return Math.sqrt(lo * hi); })();
+      const n = nth * Math.min(1, Math.pow(Math.max(I, 1e-3) / r0.Ith, 0.8));
       const dF = dEF(n, p.T); // ΔEF − Eg
       const sp = []; let smax = 0, area = 0;
       const shape = (l) => { const x = 1239.84 / l - p.Eg; if (x <= 0) return 0; const g = Math.exp(-Math.pow((l - lamL) / 6, 2)); return Math.sqrt(x / kT) * Math.exp(-x / kT) * (1 + 3 * Math.pow(Math.min(1, I / r0.Ith), 6) * g); };
@@ -1046,7 +1048,7 @@
       PB.stat("ls-o-th", sm(Ith.toFixed(1), "mA")); PB.stat("ls-o-se", sm((0.5 * p.ed * p.hv).toFixed(2), "W/A"));
       PB.stat("ls-o-p", sm((r0.P + r0.Psp).toFixed(2), "mW")); PB.stat("ls-o-df", sm(((dF - (p.hv - p.Eg)) * 1000).toFixed(0), "meV"));
       PB.stat("ls-o-st", on ? "<span class='ok-t'>레이저 (λ ≈ " + lamL.toFixed(0) + " nm)</span>" : "<span class='warn-t'>LED 영역</span>");
-    }, { get aspect() { return wide(el, 600) ? 0.6 : 1.5; }, minHeight: 320, maxHeight: 620 });
+    }, { get aspect() { return wide(el, 600) ? 0.6 : 1.6; }, minHeight: 320, maxHeight: 640 });
     drag(el, (t, x) => { if (!lay) return; gI.set(PB.clamp(Math.round((((x - lay.x) / lay.w) * Imax) * 10) / 10, 0, Imax)); });
   })();
 })();

@@ -326,7 +326,7 @@ canvas.drag:active { cursor: grabbing; }
     <p>실리콘에서는 페르미 준위 고정 때문에 금속을 아무리 골라도 장벽이 0.5 eV 아래로 잘 내려가지 않는다. 그런데도 모든 트랜지스터의 소스·드레인에는 저항이 작은 <span class="term">오믹 접촉</span><span class="en">(Ohmic contact)</span>이 있다. 비결은 장벽을 낮추는 대신 <b>얇게</b> 만드는 것이다. 공핍층 폭은 \(W\propto 1/\sqrt{N_D}\)이므로 도핑을 \(10^{20}\) cm⁻³ 근처로 올리면 장벽 두께가 수 nm가 되어 전자가 장벽을 뚫고 지나간다(터널링).</p>
     <p>어느 쪽이 우세한지는 열 에너지 \(kT\)와 터널링의 특성 에너지 \(E_{00}\)의 비교로 정해진다(파도바니–스트래튼, 1966).</p>
     <div class="formula">$$E_{00} = \frac{q\hbar}{2}\sqrt{\frac{N_D}{\varepsilon_s m^*}}, \qquad E_0 = E_{00}\coth\!\left(\frac{E_{00}}{kT}\right), \qquad \rho_c \approx \frac{k}{qA^{**}T}\exp\!\left(\frac{q\phi_B}{E_0}\right)$$
-      <div class="where">\(kT \gg E_{00}\): 열전자 방출(TE), \(E_0 \to kT\). \(kT \approx E_{00}\): 열전자–전계 방출(TFE), 꼭대기보다 조금 아래에서 뚫는다. \(kT \ll E_{00}\): 전계 방출(FE), 페르미 준위 근처에서 곧바로 터널링, \(E_0 \to E_{00}\). Si(\(m^* = 0.26m_0\))는 \(N_D = 10^{20}\)에서 \(E_{00} \approx 0.11\) eV. 위의 \(\rho_c\)는 세 영역을 한 식으로 잇는 교육용 근사로, 정확한 전·후인자는 영역마다 다르다.</div>
+      <div class="where">\(kT \gg E_{00}\): 열전자 방출(TE), \(E_0 \to kT\). \(kT \approx E_{00}\): 열전자–전계 방출(TFE), 꼭대기보다 조금 아래에서 뚫는다. \(kT \ll E_{00}\): 전계 방출(FE), 페르미 준위 근처에서 곧바로 터널링, \(E_0 \to E_{00}\). Si(\(m^* = 0.26m_0\))는 \(N_D = 10^{20}\)에서 \(E_{00} \approx 0.11\) eV. 위의 \(\rho_c\)는 세 영역을 한 식으로 잇는 교육용 근사다. 정확한 파도바니–스트래튼 식은 영역마다 전인자가 달라, 이 근사는 TFE 영역에서 실제보다 최대 한 자리쯤 크게 나온다.</div>
     </div>
     <figure class="diagram">
       <svg viewBox="0 0 690 220" role="img" aria-label="열전자 방출, 열전자–전계 방출, 전계 방출의 비교">
@@ -582,7 +582,7 @@ canvas.drag:active { cursor: grabbing; }
       ctx.save(); ctx.font = PB.font(11, true); ctx.fillStyle = P.dim; ctx.strokeStyle = P.grid; ctx.textAlign = "right"; ctx.textBaseline = "middle";
       for (var e = -1; e <= 6; e++) { ctx.beginPath(); ctx.moveTo(L, Y(e)); ctx.lineTo(xr, Y(e)); ctx.stroke(); ctx.fillText(String(e), L - 6, Y(e)); }
       ctx.restore();
-      label(ctx, "E (eV, 금속 E_F 기준)", L + 2, 14, P.dim, "left", "middle", 11);
+      label(ctx, w < 520 ? "E (eV)" : "E (eV, 금속 E_F 기준)", L + 2, 12, P.dim, "left", "middle", 11);
       // 금속
       ctx.save(); ctx.globalAlpha = 0.18; ctx.fillStyle = P.e; ctx.fillRect(ml, Y(0), mw, Y(yLo) - Y(0)); ctx.restore();
       ctx.save(); ctx.strokeStyle = P.dim; ctx.lineWidth = 1.2; ctx.strokeRect(ml, Y(0) - 0.5, mw, Y(yLo) - Y(0)); ctx.restore();
@@ -632,7 +632,7 @@ canvas.drag:active { cursor: grabbing; }
         var E = maj === "e" ? EcB + B + 0.05 + p.e * 0.32 : EcB + B - EG - 0.05 - p.e * 0.32;
         var px = PX(x) + 3 * Math.sin(T * p.sp * 2 + p.ph);
         if (px < xs0 + 3) px = xs0 + 3;
-        SC.dot(ctx, px, Y(E), maj, 3.6);
+        SC.dot(ctx, px, Y(E), maj, w < 520 ? 2.8 : 3.6);
       });
       var rs = Math.exp(-st.s * st.B / Vt0);
       if (rs > 1.5 && st.conn) {

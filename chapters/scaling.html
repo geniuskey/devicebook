@@ -878,6 +878,7 @@ td.dn-up { color: var(--bad); font-weight: 700; } td.dn-dn { color: var(--ok); f
     }
     if (!T) { readout(); return; }
     const THREE = T.THREE, grp = new THREE.Group(); T.scene.add(grp);
+    let zoomed = false;
     let labels = [], elec = [], chans = [];
     const U = 0.1; // 1 nm = 0.1 단위
     function mats() {
@@ -896,6 +897,8 @@ td.dn-up { color: var(--bad); font-weight: 700; } td.dn-dn { color: var(--ok); f
     function build() {
       readout();
       if (!T) return;
+      const asp = el.clientWidth / (el.clientHeight || 400);
+      if (!zoomed && el.clientWidth > 0 && asp < 1.15) { zoomed = true; T.camera.position.multiplyScalar(1.5); if (T.controls) T.controls.update(); }
       while (grp.children.length) { const c = grp.children.pop(); c.geometry && c.geometry.dispose(); }
       labels.forEach((L) => L.remove()); labels = []; elec = []; chans = [];
       const M = mats(), kind = gK(), a = ga(), b = gb(), c = gc();

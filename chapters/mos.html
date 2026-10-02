@@ -660,7 +660,7 @@ canvas.drag:active { cursor: grabbing; }
       var fl = [[gx0, fy0], [gx1, fy0], [gx1, fpx(Eox)], [ox1, fpx(Eox)], [ox1, fpx(Es)]];
       for (var q = 1; q <= 200; q++) { var xq = q / 200 * st.Xs, pq = ppAt(xq); fl.push([PX(xq), fpx(sg * Math.sign(pq) * Math.abs(m.Qs(sg * pq, "lf")) / ES)]); }
       polyline(ctx, fl, P.accent2, 2.2);
-      label(ctx, "ℰox " + PB.fmt(Math.abs(Eox) / 1e6, 2) + " MV/cm", gx1 - 4, Eox >= 0 ? fpx(Eox) - 8 : fpx(Eox) + 8, P.accent2, "right", "middle", 10, true);
+      label(ctx, "ℰox " + PB.fmt(Math.abs(Eox) / 1e6, 2) + " MV/cm", ox1 + 6, Eox >= 0 ? fBot - 6 : fTop + 6, P.accent2, "left", "middle", 10, true);
       // 판독
       var Wd2 = st.pp > Vt0 ? Math.abs(st.Qdep) / (Q * m.N) : 0;
       PB.stat("mb-o-reg", rg[0]);
