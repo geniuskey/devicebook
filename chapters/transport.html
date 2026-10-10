@@ -294,7 +294,7 @@
         <div class="stat"><span class="k">가운데를 넘는 흐름 측정</span><span class="v" id="df-o-f">—</span></div>
         <div class="stat"><span class="k">픽의 법칙 −D dn/dx</span><span class="v" id="df-o-ff">—</span></div>
       </div>
-      <div class="sim-note">위: 1차원 무작위 행보를 하는 입자(세로 위치는 보기 좋게 흩뜨린 것). 아래: 위치별 개수 막대와 확산 방정식의 해(선), 화살표는 픽의 법칙이 예측하는 흐름. 해볼 것: ① 가운데 언덕의 σ가 √t로 커지는지 본다(t가 4배면 σ는 2배). ② '한쪽에 몰기'에서 가장 가파른 곳의 흐름이 가장 크다. 기울기가 0인 꼭대기에서는 흐름도 0이다. ③ 평평해지면 입자는 여전히 바쁘게 움직이지만 알짜 흐름은 0 — 평형이다. ④ D = 36 cm²/s(Si 전자), 12(Si 정공)를 비교. 상자 폭 40 µm, 1 s = 1 ns.</div>
+      <div class="sim-note">위: 1차원 무작위 행보를 하는 입자(세로 위치는 보기 좋게 흩뜨린 것). 아래: 위치별 개수 막대와 확산 방정식의 해(선), 화살표는 픽의 법칙이 예측하는 흐름. 해볼 것: ① 벽에 닿기 전 가운데 언덕의 σ가 √t로 커지는지 본다(t가 4배면 σ는 약 2배). 반사벽에 닿은 뒤에는 이론도 유한 상자 해를 사용하며 장시간에는 σ = 40/√12 ≈ 11.5 µm인 균일 분포로 간다. ② '한쪽에 몰기'에서 가장 가파른 곳의 흐름이 가장 크다. 기울기가 0인 꼭대기에서는 흐름도 0이다. ③ 평평해지면 입자는 여전히 바쁘게 움직이지만 알짜 흐름은 0 — 평형이다. ④ D = 36 cm²/s(Si 전자), 12(Si 정공)를 비교. 상자 폭 40 µm, 1 s = 1 ns.</div>
     </div>
     <p>확산 계수와 이동도는 둘 다 같은 산란 과정(\(\tau_m\))에서 나오므로 서로 묶여 있다. 다음 절에서 평형 조건으로 정확한 관계를 얻는다.</p>
   </section>
@@ -328,7 +328,7 @@
         <div class="stat"><span class="k">최대 내부 전기장</span><span class="v" id="gd-o-e">—</span></div>
         <div class="stat"><span class="k">드리프트 전류 최대 크기</span><span class="v" id="gd-o-j">—</span></div>
       </div>
-      <div class="sim-note">2 µm 길이 Si 막대를 포아송 방정식으로 푼 평형 해(SC.Device1D). 위: 밴드 다이어그램 — 페르미 준위(청록 점선)는 평평하고 E<sub>c</sub>가 도핑을 따라 기운다. 아래: 전자 드리프트·확산 전류 밀도. 해볼 것: ① '지수' 모양은 ln N이 직선이라 전기장이 고르다(밴드가 곧게 기운다). ② N<sub>D1</sub> = 10¹⁸, N<sub>D2</sub> = 10¹⁵이면 각 전류는 10⁴ A/cm² 규모인데 합은 0이다. 엄청난 두 흐름이 정확히 맞서 있다. ③ '계단'(n⁺/n 접합)이면 전기장이 경계 근처 몇 디바이 길이에 몰린다. 이것이 다음 장 pn 접합 내부 전위의 축소판이다.</div>
+      <div class="sim-note">2 µm 길이 Si 막대를 포아송 방정식으로 푼 평형 해(SC.Device1D). 위: 밴드 다이어그램 — 페르미 준위(청록 점선)는 평평하고 E<sub>c</sub>가 도핑을 따라 기운다. 아래: 전자 전류를 솔버와 같은 격자 변에서 SG 플럭스로 분해했다. 드리프트는 변의 평균 농도·전기장, 확산 성분은 나머지 SG 플럭스이며 작은 격자 전위차에서 qD·dn/dx로 접근한다. 합은 솔버의 순전류다. 해볼 것: ① '지수' 모양은 ln N이 직선이라 전기장이 고르다(밴드가 곧게 기운다). ② N<sub>D1</sub> = 10¹⁸, N<sub>D2</sub> = 10¹⁵이면 각 전류는 10⁴ A/cm² 규모인데 합은 0이다. 엄청난 두 흐름이 정확히 맞서 있다. ③ '계단'(n⁺/n 접합)이면 전기장이 경계 근처 몇 디바이 길이에 몰린다. 이것이 다음 장 pn 접합 내부 전위의 축소판이다.</div>
     </div>
     <div class="table-wrap">
       <table>
@@ -497,7 +497,7 @@
       const E = gE() * 1e3, vd = mu * E;
       return { c, ms, vth, tau, mu, E, vd, vthS: vth * K, tauS: gT() * TS, aS: ((c === "e" ? -1 : 1) * vd * K) / (gT() * TS) };
     }
-    function newVel(p, P) { const s = P.vthS / Math.SQRT2; p.vx = PB.randn() * s; p.vy = PB.randn() * s; p.tf = -P.tauS * Math.log(1 - Math.random()); }
+    function newVel(p, P) { const s = P.vthS / Math.sqrt(3); p.vx = PB.randn() * s; p.vy = PB.randn() * s; p.tf = -P.tauS * Math.log(1 - Math.random()); }
     function init() {
       const P = phys(); parts = [];
       for (let i = 0; i < NP; i++) { const p = { x: Math.random() * W, y: top + 6 + Math.random() * (H - top - bot - 12) }; newVel(p, P); parts.push(p); }
@@ -790,20 +790,37 @@
       snapshot();
     }
     document.querySelectorAll("#sim-diff [data-init]").forEach((b) => b.addEventListener("click", () => init(b.dataset.init)));
-    // 이론 해: 초기 분포(200칸) ⊗ 가우시안, 벽에서 반사(거울상)
+    // Reflecting-wall heat kernel, integrated over histogram bins.
+    // Images resolve narrow clouds; the Neumann cosine series converges at long times.
     function theory(nb) {
-      const D = gD() * 0.1, out = new Float64Array(nb), s2 = 2 * D * t; // µm²/ns × ns
-      for (let j = 0; j < nb; j++) {
-        const x = ((j + 0.5) / nb) * LB;
-        let v = 0;
-        for (let k = 0; k < 200; k++) {
-          if (!x0hist[k]) continue;
-          const xk = ((k + 0.5) / 200) * LB;
-          if (s2 < 1e-6) { if (Math.abs(x - xk) < LB / nb / 2) v += x0hist[k]; continue; }
-          const g = (d) => Math.exp((-d * d) / (2 * s2));
-          v += x0hist[k] * (g(x - xk) + g(x + xk) + g(2 * LB - x - xk));
+      const out = new Float64Array(nb), s2 = 2 * gD() * 0.1 * t;
+      const erf = (z) => {
+        const sign = Math.sign(z), x = Math.abs(z), u = 1 / (1 + 0.3275911 * x);
+        return sign * (1 - (((((1.061405429 * u - 1.453152027) * u) + 1.421413741) * u - 0.284496736) * u + 0.254829592) * u * Math.exp(-x * x));
+      };
+      for (let k = 0; k < 200; k++) {
+        if (!x0hist[k]) continue;
+        const xk = (k + 0.5) * LB / 200;
+        if (s2 < 1e-12) { out[Math.min(nb - 1, Math.floor(xk * nb / LB))] += x0hist[k]; continue; }
+        for (let j = 0; j < nb; j++) {
+          const a = j * LB / nb, b = (j + 1) * LB / nb;
+          let prob = 0;
+          if (s2 > 0.05 * LB * LB) {
+            prob = 1 / nb;
+            const count = Math.ceil(Math.sqrt(56 / s2) * LB / Math.PI);
+            for (let m = 1; m <= count; m++) {
+              const omega = m * Math.PI / LB;
+              prob += 2 * Math.cos(omega * xk) * Math.exp(-0.5 * omega * omega * s2) * (Math.sin(omega * b) - Math.sin(omega * a)) / (m * Math.PI);
+            }
+          } else {
+            const sigma = Math.sqrt(s2), count = Math.ceil((LB + 8 * sigma) / (2 * LB));
+            const cdf = x => 0.5 * (1 + erf(x / (Math.SQRT2 * sigma)));
+            for (let m = -count; m <= count; m++) {
+              for (const center of [xk + 2 * m * LB, -xk + 2 * m * LB]) prob += cdf(b - center) - cdf(a - center);
+            }
+          }
+          out[j] += x0hist[k] * Math.max(0, prob);
         }
-        out[j] = s2 < 1e-6 ? v : (v * (LB / nb)) / Math.sqrt(2 * Math.PI * s2);
       }
       return out;
     }
@@ -859,7 +876,7 @@
         PB.stat("df-o-t", small(t.toFixed(1), "ns"));
         const n = parts.length, m = parts.reduce((s, p) => s + p.x, 0) / Math.max(1, n);
         const sd = Math.sqrt(parts.reduce((s, p) => s + (p.x - m) * (p.x - m), 0) / Math.max(1, n));
-        PB.stat("df-o-s", mode === "bump" ? small(sd.toFixed(1) + " / " + Math.sqrt(sig0 * sig0 + 2 * D * t).toFixed(1), "µm") : small(sd.toFixed(1), "µm (단일 언덕에서 비교)"));
+        PB.stat("df-o-s", mode === "bump" ? small(sd.toFixed(1) + " / " + (() => { const bins = theory(120), dx = LB / bins.length, total = bins.reduce((a, b) => a + b, 0); if (!total) return "—"; const mean = bins.reduce((a, b, i) => a + b * (i + 0.5) * dx, 0) / total; return Math.sqrt(bins.reduce((a, b, i) => a + b * ((i + 0.5) * dx - mean) ** 2, 0) / total).toFixed(1); })(), "µm") : small(sd.toFixed(1), "µm (단일 언덕에서 비교)"));
         PB.stat("df-o-f", small((flux >= 0 ? "+" : "") + flux.toFixed(0), "개/ns"));
         if (th) { const j = Math.floor(th.length / 2), dxb = LB / th.length; const g = (th[j] - th[j - 1]) / dxb / dxb; PB.stat("df-o-ff", small(((-D * g) >= 0 ? "+" : "") + (-D * g).toFixed(0), "개/ns")); }
       }
@@ -890,11 +907,15 @@
       st = dev.state();
       const n = st.n.length, xs = Array.from(st.x, (v) => v * 1e4);
       const jd = [], jf = [], js = [];
-      for (let i = 1; i < n - 1; i++) {
-        const N = prof(st.x[i]), mu = SC.mobility("Si", N, 300, "n"), D = mu * kT;
-        const dndx = (st.n[i + 1] - st.n[i - 1]) / (st.x[i + 1] - st.x[i - 1]);
-        const a = q * st.n[i] * mu * st.E[i], b = q * D * dndx;
-        jd.push([xs[i], a]); jf.push([xs[i], b]); js.push([xs[i], a + b]);
+      // Same edge flux as Device1D; the fitted diffusion coefficient tends to D
+      // as Δψ/Vt → 0. This decomposition preserves discrete equilibrium cancellation.
+      for (let i = 0; i < n - 1; i++) {
+        const h = st.x[i + 1] - st.x[i];
+        const mu = 0.5 * (SC.mobility("Si", prof(st.x[i]), 300, "n") + SC.mobility("Si", prof(st.x[i + 1]), 300, "n"));
+        const field = -(st.psi[i + 1] - st.psi[i]) / h;
+        const a = q * mu * (st.n[i] + st.n[i + 1]) * 0.5 * field;
+        const x = (xs[i] + xs[i + 1]) / 2;
+        jd.push([x, a]); jf.push([x, st.Jn[i] - a]); js.push([x, st.Jn[i]]);
       }
       extra = { xs, jd, jf, js, N1, N2 };
       cv.redraw();

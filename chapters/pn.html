@@ -249,7 +249,7 @@
     <div class="formula">$$L_D = \sqrt{\frac{\varepsilon_s kT}{q^2 N}} \qquad (N = 10^{15}, 10^{16}, 10^{17}, 10^{18}\ \text{cm}^{-3} \text{에서 } 129,\ 41,\ 13,\ 4\ \text{nm})$$
       <div class="where">공핍층 가장자리는 약 \(2\sim3L_D\) 폭으로 번진다. 이 꼬리의 이동 캐리어 몫을 고려하면 \(W\) 식의 \(V_{bi}-V\)는 \(V_{bi}-V-2kT/q\)로 바뀐다(약 52 mV 보정). \(W \gg L_D\)인 한 공핍 근사는 훌륭하다.</div>
     </div>
-    <p>아래 시뮬레이터는 같은 접합을 두 가지로 푼다. 점선은 공핍 근사, 실선은 이 책의 1차원 드리프트–확산 솔버(<code>SC.Device1D</code>, 비선형 포아송 + 연속 방정식, 1201 격자점)가 근사 없이 구한 해다.</p>
+    <p>아래 시뮬레이터는 같은 접합을 두 가지로 푼다. 점선은 공핍 근사, 실선은 이 책의 1차원 드리프트–확산 솔버(<code>SC.Device1D</code>, 비선형 포아송 + 연속 방정식, 1201 격자점)가 볼츠만 통계·완전 이온화·고정 재료 밴드갭 모형 안에서 공핍 근사 없이 구한 유한 격자 수치 해다.</p>
     <div class="sim" id="sim-exact">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>공핍 근사 vs 정확한 포아송 수치 해</h3></div>
       <div class="sim-body side">
@@ -363,7 +363,7 @@
     <div class="quiz">
       <div class="quiz-q"><p>실리콘(300 K) 계단 접합, N<sub>A</sub> = 10¹⁷, N<sub>D</sub> = 10¹⁵ cm⁻³의 내부 전위는 대략?</p><div class="opts">
         <button class="opt">0.36 V</button><button class="opt" data-correct>0.71 V</button><button class="opt">1.12 V</button><button class="opt">0.06 V</button>
-      </div><div class="quiz-exp">\(V_{bi} = 0.02585\ln(10^{32}/(1.07\times10^{10})^2) = 0.02585 \times 27.5 \approx 0.71\) V. 공교롭게 10¹⁶/10¹⁶ 접합과 같다 — 곱 \(N_AN_D\)만 중요하다. 밴드갭(1.12 V)을 넘을 수는 없다.</div></div>
+      </div><div class="quiz-exp">\(V_{bi} = 0.02585\ln(10^{32}/(1.07\times10^{10})^2) = 0.02585 \times 27.5 \approx 0.71\) V. 공교롭게 10¹⁶/10¹⁶ 접합과 같다 — 곱 \(N_AN_D\)만 중요하다. 두 벌크 페르미 준위가 밴드갭 안에 있을 때 내장 전위는 Eg/q 이하이다. 축퇴 접합에는 이 상한을 일반화할 수 없다.</div></div>
       <div class="quiz-q"><p>p⁺n 접합(N<sub>A</sub> = 10¹⁹, N<sub>D</sub> = 10¹⁵)에 역바이어스를 걸었다. 공핍층의 대부분과 전압 강하는 어디에?</p><div class="opts">
         <button class="opt">p⁺쪽</button><button class="opt" data-correct>n쪽</button><button class="opt">양쪽에 반씩</button><button class="opt">바이어스 방향에 따라 바뀐다</button>
       </div><div class="quiz-exp">\(N_Ax_p = N_Dx_n\)이므로 \(x_n/x_p = N_A/N_D = 10^4\). 전위 몫도 \(V_n/V_p = N_A/N_D\)라 가볍게 도핑된 n쪽이 거의 전부 받는다.</div></div>

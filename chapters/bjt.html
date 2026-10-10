@@ -172,7 +172,7 @@
         <div class="stat"><span class="k">중성 베이스 폭</span><span class="v" id="an-wbn">—</span></div>
         <div class="stat"><span class="k">입자: 주입 / 재결합 / 수집 / 역주입</span><span class="v" id="an-cnt">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① V<sub>BE</sub>를 0.05 V 올리면 주입 빈도와 모델 전류가 약 7배(e<sup>0.05/0.0259</sup>)가 된다. ② τ<sub>B</sub>를 줄이고 W<sub>B</sub>를 늘리면 베이스 가운데서 전자가 가전자대로 떨어지는(재결합) 장면이 잦아지고 β가 무너진다. ③ V<sub>CB</sub>를 올리면 컬렉터 쪽 낙차만 깊어지고 수집되는 전자 수는 거의 그대로다. 다만 B–C 공핍층이 베이스를 파고들어 중성 베이스 폭이 줄고 I<sub>C</sub>가 조금 는다(얼리 효과). 실제 소자의 τ<sub>B</sub>는 이보다 훨씬 길어 재결합이 1만 개 중 1개꼴이다.</div>
+      <div class="sim-note">해볼 것: ① V<sub>BE</sub>를 0.05 V 올리면 이상 모델 전류가 약 7배(e<sup>0.05/0.0259</sup>)가 된다. 화면 주입 빈도는 보기 좋게 완화한 지수율(0.05 V당 약 e배)과 상한을 사용하므로 전류 배율과 같지 않다. ② τ<sub>B</sub>를 줄이고 W<sub>B</sub>를 늘리면 베이스 가운데서 전자가 가전자대로 떨어지는(재결합) 장면이 잦아지고 β가 무너진다. ③ V<sub>CB</sub>를 올리면 컬렉터 쪽 낙차만 깊어지고 수집되는 전자 수는 거의 그대로다. 다만 B–C 공핍층이 베이스를 파고들어 중성 베이스 폭이 줄고 I<sub>C</sub>가 조금 는다(얼리 효과). 실제 소자의 τ<sub>B</sub>는 이보다 훨씬 길어 재결합이 1만 개 중 1개꼴이다.</div>
     </div>
   </section>
 
@@ -370,7 +370,7 @@
     </div>
     <p>포화에서는 \(I_F\)와 \(I_R\)이 모두 크고 서로 상쇄되어 \(I_C\)가 \(\beta_FI_B\)보다 작아진다. 에버스–몰 식에서 \(I_C/I_B=\beta_{forced}\)를 넣으면 포화 전압을 얻는다.</p>
     <div class="formula">$$V_{CE,sat} = V_t\ln\!\left[\frac{1+(1+\beta_{forced})/\beta_R}{1-\beta_{forced}/\beta_F}\right]$$
-      <div class="where">\(\beta_{forced}\to0\)이면 \(V_t\ln(1+1/\beta_R)\)(수십 mV), \(\beta_{forced}\to\beta_F\)이면 발산한다(활성 영역 경계).</div>
+      <div class="where">\(\beta_{forced}\to0\)이면 \(V_t\ln(1+1/\beta_R)\)(수십 mV), \(\beta_{forced}\to\beta_F\)이면 근사식이 발산하지만 이때 B–C 접합의 −1 무시 가정이 깨진다. 정확한 활성 영역 경계는 VBC = 0, VCE = VBE이며 유한하다. 이 식은 두 접합이 충분히 순방향인 깊은 포화 근사다.</div>
     </div>
 
     <div class="sim" id="sim-modes">
@@ -432,7 +432,7 @@
   <!-- ================================================================ 9 -->
   <section id="hbt">
     <h2>이종 접합 바이폴라 트랜지스터 (HBT)</h2>
-    <p>동종 접합 BJT에서 \(\gamma\)를 높이는 유일한 손잡이는 도핑 비 \(N_E/N_B\)였다. 크뢰머는 1957년 이미터를 베이스보다 밴드갭이 큰 물질로 만들면 정공이 이미터로 넘어가는 장벽만 \(\Delta E_g\)만큼 높일 수 있음을 지적했다. 전자 장벽은 그대로 두고 정공 장벽만 올리니 \(\gamma\)가 \(e^{\Delta E_g/kT}\)배로 좋아진다.</p>
+    <p>동종 접합 BJT에서 \(\gamma\)는 도핑 비 \(N_E/N_B\)와 폭·확산 계수·수명 등의 수송 조건에 의존한다. 크뢰머는 1957년 이미터를 베이스보다 밴드갭이 큰 물질로 만들면 정공이 이미터로 넘어가는 장벽만 \(\Delta E_g\)만큼 높일 수 있음을 지적했다. 전자 장벽은 그대로 두고 정공 장벽만 올리니 역주입/주입 비 \(r=(1-\gamma)/\gamma\)가 \(e^{-\Delta E_g/kT}\)배로 줄어 \(\gamma_{HBT}\approx[1+r_{BJT}e^{-\Delta E_g/kT}]^{-1}\)로 1에 접근한다. γ 자체를 지수 배율만큼 곱하는 것은 아니다. β의 지수 개선도 주입 손실이 이득을 제한하고 다른 수송 손실이 작을 때의 근사다.</p>
     <div class="formula">$$\frac{\beta_{HBT}}{\beta_{BJT}} \sim e^{\Delta E_g/kT} \quad (\Delta E_g = 0.1\text{ eV} \Rightarrow \approx 48\text{배})$$
       <div class="where">이 여유를 \(\beta\)로 쓰지 않고 베이스를 10~100배 진하게(10¹⁹~10²⁰ cm⁻³) 만드는 데 쓴다. 그러면 베이스 저항 \(r_b\)가 줄고, 베이스를 수십 nm로 얇게 해도 펀치스루가 없으며, 얼리 전압도 커진다. 최대 진동 주파수 \(f_{max}\approx\sqrt{f_T/(8\pi r_bC_\mu)}\)가 크게 오른다.</div>
     </div>

@@ -72,7 +72,7 @@ canvas.drag:active { cursor: grabbing; }
   <section id="levels">
     <h2>진공 준위, 일함수, 전자 친화도</h2>
     <p>서로 다른 두 물질의 에너지를 비교하려면 공통의 기준이 필요하다. 그 기준이 <span class="term">진공 준위</span><span class="en">(Vacuum level, \(E_{\text{vac}}\))</span>, 즉 전자가 물질을 막 벗어나 표면 바로 바깥에 정지해 있을 때의 에너지다. 진공 준위에서 페르미 준위까지 내려간 깊이가 <span class="term">일함수</span><span class="en">(Work function, \(\phi\))</span>다. 페르미 준위에 있는 전자 하나를 끄집어내는 데 드는 최소 에너지라고 생각하면 된다.</p>
-    <p>금속은 페르미 준위가 전자로 꽉 찬 밴드 한가운데에 있으므로 일함수 \(\phi_m\)이 물질 고유의 상수다. 반도체는 사정이 다르다. 페르미 준위가 도핑에 따라 밴드갭 안을 오르내리므로 일함수 \(\phi_s\)도 도핑에 따라 바뀐다. 그래서 반도체에서는 도핑과 무관한 값인 <span class="term">전자 친화도</span><span class="en">(Electron affinity, \(\chi\))</span>, 즉 진공 준위에서 전도대 바닥 \(E_c\)까지의 깊이를 쓴다. 실리콘은 \(\chi \approx 4.05\) eV이다.</p>
+    <p>금속의 페르미 준위는 부분 점유된 밴드 또는 겹치는 밴드에 있다. 일함수 \(\phi_m\)은 진공 준위와의 차이이며 결정면·흡착·표면 상태·온도에 따라 달라진다. 아래 표는 대표값이다. 반도체는 사정이 다르다. 페르미 준위가 도핑에 따라 밴드갭 안을 오르내리므로 일함수 \(\phi_s\)도 도핑에 따라 바뀐다. 그래서 반도체에서는 도핑과 무관한 값인 <span class="term">전자 친화도</span><span class="en">(Electron affinity, \(\chi\))</span>, 즉 진공 준위에서 전도대 바닥 \(E_c\)까지의 깊이를 쓴다. 실리콘은 \(\chi \approx 4.05\) eV이다.</p>
     <div class="formula">$$\phi_s = \chi + (E_c - E_F) = \begin{cases} \chi + kT\ln(N_c/N_D) & \text{n형}\\[2pt] \chi + E_g - kT\ln(N_v/N_A) & \text{p형} \end{cases}$$
       <div class="where">이 책에서 Si: \(\chi = 4.05\) eV, \(E_g = 1.12\) eV, \(N_c = 2.86\times10^{19}\), \(N_v = 3.10\times10^{19}\) cm⁻³ (300 K). \(N_D = 10^{16}\)이면 \(E_c - E_F = 0.21\) eV, \(\phi_s = 4.26\) eV.</div>
     </div>
@@ -182,7 +182,7 @@ canvas.drag:active { cursor: grabbing; }
     <h2>공핍층, 전기장, 그리고 C–V</h2>
     <p>쇼트키 접합의 반도체 쪽은 한쪽 계단 접합(p⁺n 접합의 n쪽)과 똑같이 다룰 수 있다. 금속은 전하를 표면에 몰아 두므로 공핍층은 반도체 쪽에만 생긴다. 공핍 근사로 포아송 방정식을 풀면 전기장은 계면에서 최대이고 \(W\)까지 직선으로 줄어들며, 전위는 포물선이다. 순방향 바이어스 \(V\)(금속 +)는 반도체 쪽 장벽을 \(V_{bi}-V\)로 낮추지만 금속 쪽 장벽 \(\phi_B\)는 바꾸지 못한다.</p>
     <div class="formula">$$W = \sqrt{\frac{2\varepsilon_s}{qN_D}\left(V_{bi} - V - \frac{kT}{q}\right)}, \qquad \mathcal{E}_{\max} = \frac{qN_DW}{\varepsilon_s}, \qquad \frac{1}{C^2} = \frac{2\,(V_{bi} - V - kT/q)}{q\varepsilon_s N_D}$$
-      <div class="where">\(kT/q\) 항은 다수 캐리어 꼬리의 보정. \(1/C^2\)를 \(V\)에 대해 그리면 직선이 되고, 기울기에서 \(N_D\), 가로축 절편에서 \(V_{bi}\)(따라서 \(\phi_B = V_{bi} + (E_c-E_F)/q\))를 얻는다. 균일하지 않은 도핑이면 기울기가 깊이에 따라 바뀌어 도핑 프로파일 측정법이 된다.</div>
+      <div class="where">\(kT/q\) 항은 다수 캐리어 꼬리의 보정. \(1/C^2\)를 \(V\)에 대해 그리면 직선이 되고, 기울기에서 \(N_D\), 가로축 절편 \(V_x\)에 \(kT/q\)를 더해 \(V_{bi}=V_x+kT/q\)(따라서 \(\phi_B = V_{bi} + (E_c-E_F)/q\))를 얻는다. 균일하지 않은 도핑이면 기울기가 깊이에 따라 바뀌어 도핑 프로파일 측정법이 된다.</div>
     </div>
     <div class="sim" id="sim-dep">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>쇼트키 공핍층과 1/C²–V 그래프</h3></div>
@@ -212,7 +212,7 @@ canvas.drag:active { cursor: grabbing; }
     <h2>페르미 준위 고정</h2>
     <p>쇼트키–모트 규칙대로라면 Si 위의 장벽 높이는 금속 일함수를 따라 기울기 1로 변해야 한다. 실제로는 기울기가 0.1~0.3 정도밖에 안 된다. 금속을 무엇으로 바꾸든 장벽이 0.5~0.9 eV 범위에 머무르는 것이다. 바딘(1947)은 이것을 반도체 표면의 <span class="term">계면 준위</span><span class="en">(Interface states)</span>로 설명했다. 결정이 끊긴 표면의 댕글링 본드, 그리고 금속 전자의 파동 함수가 반도체 밴드갭 속으로 스며들어 생기는 <span class="term">금속 유도 갭 준위</span><span class="en">(MIGS, Metal-induced gap states)</span>가 밴드갭 안에 많은 준위를 만든다.</p>
     <p>계면 준위는 <span class="term">전하 중성 준위</span><span class="en">(Charge neutrality level, \(\phi_0\))</span>를 경계로, 그보다 위가 채워지면 음전하, 아래가 비면 양전하를 띤다. 계면 준위 밀도가 크면 아주 작은 페르미 준위 이동만으로도 큰 전하가 생기므로, 금속에서 넘어온 전하는 대부분 계면 준위가 흡수하고 공핍층은 거의 영향을 받지 않는다. 페르미 준위가 \(\phi_0\) 근처에 '못 박히는' 이 현상이 <span class="term">페르미 준위 고정</span><span class="en">(Fermi-level pinning)</span>이다.</p>
-    <div class="formula">$$q\phi_{Bn} = S\,q(\phi_m - \chi) + (1 - S)\,(E_g - q\phi_0), \qquad S \equiv \frac{d\phi_{Bn}}{d\phi_m} = \frac{1}{1 + q^2 D_{it}\,\delta/\varepsilon_i}$$
+    <div class="formula">$$q\phi_{Bn} = S\,q(\phi_m - \chi) + (1 - S)\,(E_g - q\phi_0), \qquad S \equiv \frac{d\phi_{Bn}}{d\phi_m} = \frac{1}{1 + q D_{it}\,\delta/\varepsilon_i}$$
       <div class="where">\(\phi_0\): 전하 중성 준위의 \(E_v\) 기준 위치. \(D_{it}\): 계면 준위 밀도(cm⁻²eV⁻¹), \(\delta\), \(\varepsilon_i\): 계면층의 두께와 유전율 (카울리–Sze 모형). \(S = 1\)이면 쇼트키–모트, \(S = 0\)이면 완전 고정(바딘 극한). 대표값 Si \(S \approx 0.1\sim0.27\), GaAs ≈ 0.07, Ge ≈ 0.05(\(E_v\) 근처 고정), 이온성이 큰 ZnO·SiO₂ 계열은 \(S\)가 1에 가깝다.</div>
     </div>
     <figure class="diagram">
@@ -449,7 +449,7 @@ canvas.drag:active { cursor: grabbing; }
     <ol>
       <li>진공 준위를 기준으로 금속은 일함수 \(\phi_m\), 반도체는 전자 친화도 \(\chi\)로 준위를 맞춘다. 접촉하면 페르미 준위가 같아질 때까지 전하가 이동해 밴드가 휜다.</li>
       <li>이상적 쇼트키–모트 규칙: \(\phi_{Bn} = \phi_m - \chi\), \(\phi_{Bn}+\phi_{Bp} = E_g/q\). n형에서 \(\phi_m > \phi_s\)면 쇼트키, \(\phi_m < \phi_s\)면 축적형 오믹.</li>
-      <li>공핍층은 한쪽 계단 접합과 같다. \(1/C^2\)–\(V\) 직선의 기울기에서 도핑, 절편에서 \(V_{bi}\)와 \(\phi_B\)를 얻는다.</li>
+      <li>공핍층은 한쪽 계단 접합과 같다. \(1/C^2\)–\(V\) 직선의 기울기에서 도핑, 절편 \(V_x\)에 열전압을 더한 \(V_{bi}=V_x+kT/q\)로 \(\phi_B\)를 얻는다.</li>
       <li>실제 Si에서는 계면 준위(MIGS) 때문에 \(S \approx 0.1\sim0.3\)으로 페르미 준위가 고정되어 장벽이 0.5~0.9 eV에 머문다.</li>
       <li>열전자 방출 \(J = A^{**}T^2e^{-q\phi_B/kT}(e^{qV/nkT}-1)\): 다수 캐리어 소자라 켜짐 전압이 pn보다 0.3~0.4 V 낮고 역회복이 없다. 대신 누설이 크다.</li>
       <li>영상력 저하 \(\Delta\phi = \sqrt{q\mathcal{E}/4\pi\varepsilon_s}\) 때문에 역방향 전류가 바이어스에 따라 늘어난다.</li>

@@ -117,7 +117,7 @@
         <div class="stat"><span class="k">np / n<sub>i</sub>²</span><span class="v" id="fd-o-np">—</span></div>
         <div class="stat"><span class="k">E<sub>F</sub> − E<sub>i</sub></span><span class="v" id="fd-o-ei">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① E<sub>F</sub>를 E<sub>c</sub> 쪽으로 \(kT\ln10 \approx 60\) meV 올릴 때마다 n은 10배, p는 1/10이 된다. np/n<sub>i</sub>²는 1로 유지된다(질량 작용 법칙). ② 온도를 올리면 f(E)의 경계가 완만해지고 n(E)·p(E) 봉우리가 넓고 높아진다. ③ E<sub>F</sub>를 E<sub>c</sub> 위로 올려 보자. n(E)가 더 이상 지수 꼬리가 아니라 E<sub>F</sub>에서 잘린 덩어리가 되고 np/n<sub>i</sub>²가 1보다 작아진다. 축퇴 영역이다(마지막 절).</div>
+      <div class="sim-note">해볼 것: ① 비축퇴 영역에서 E<sub>F</sub>를 E<sub>c</sub> 쪽으로 \(kT\ln10 \approx 60\) meV 올릴 때마다 n은 10배, p는 1/10이 된다. np/n<sub>i</sub>²는 1로 유지된다(질량 작용 법칙). ② 온도를 올리면 f(E)의 경계가 완만해지고 n(E)·p(E) 봉우리가 넓고 높아진다. ③ E<sub>F</sub>를 E<sub>c</sub> 위로 올려 보자. n(E)가 더 이상 지수 꼬리가 아니라 E<sub>F</sub>에서 잘린 덩어리가 되고 np/n<sub>i</sub>²가 1보다 작아진다. 축퇴 영역이다(마지막 절).</div>
     </div>
   </section>
 
@@ -153,7 +153,7 @@
         <div class="stat"><span class="k">E<sub>g</sub>(T)</span><span class="v" id="ni-o-g">—</span></div>
         <div class="stat"><span class="k">기울기로 읽은 활성화 에너지</span><span class="v" id="ni-o-a">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 아레니우스 축에서 거의 직선이다. 기울기 = \(-E_a/2k\)이고, \(n_i/T^{3/2}\)로 읽은 \(E_a\)는 그 온도의 \(E_g\)가 아니라 \(E_g\)를 0 K로 외삽한 값(Si ≈ 1.2 eV)에 가깝다. 바시니 식의 선형 감소분이 기울기에 흡수되기 때문이다. ② Si는 300 → 400 K에서 n<sub>i</sub>가 약 500배 커진다. ③ 600 K(327 °C)에서 Si의 n<sub>i</sub>는 ~4×10¹⁵로 웬만한 도핑과 맞먹지만 4H-SiC는 여전히 1 cm⁻³ 근처다.</div>
+      <div class="sim-note">해볼 것: ① 아레니우스 축에서 거의 직선이다. 보정한 \(\ln(n_i/T^{3/2})\) 대 \(1/T\)의 국소 기울기는 \(-E_a/(2k)\), \(E_a=E_g-T\,dE_g/dT\)다. 화면은 보정 전 \(n_i\)를 로그 눈금과 \(1000/T\) 축에 표시하므로 \(\log_{10}n_i\)의 화면 기울기는 \(-(E_a+3kT)/(2000k\ln10)\)다. 읽기값에서 \(n_i/T^{3/2}\)로 읽은 \(E_a\)는 그 온도의 \(E_g\)가 아니라 \(E_g\)를 0 K로 외삽한 값(Si ≈ 1.2 eV)에 가깝다. 바시니 식의 선형 감소분이 기울기에 흡수되기 때문이다. ② Si는 300 → 400 K에서 n<sub>i</sub>가 약 500배 커진다. ③ 600 K(327 °C)에서 Si의 n<sub>i</sub>는 ~4×10¹⁵로 웬만한 도핑과 맞먹지만 같은 교육용 모형의 4H-SiC는 약 3×10⁶ cm⁻³로 훨씬 작다.</div>
     </div>
     <div class="table-wrap">
       <table>
@@ -228,7 +228,7 @@
 
   <section id="ef">
     <h2>질량 작용 법칙과 페르미 준위의 위치</h2>
-    <p>볼츠만 식의 곱 \(np = N_cN_ve^{-E_g/kT}\)에는 \(E_F\)가 없다. 즉 도핑과 무관하게 열평형이면 언제나 <span class="term">질량 작용 법칙</span><span class="en">(Mass-action law)</span> \(np = n_i^2\)이 성립한다. 전자를 늘리면 정공은 그만큼 줄어든다. 늘어난 전자가 정공과 더 자주 만나 재결합하기 때문이다. 여기에 <b>전하 중성 조건</b>을 더하면 \(n\)과 \(p\)가 정해진다.</p>
+    <p>볼츠만 식의 곱 \(np = N_cN_ve^{-E_g/kT}\)에는 \(E_F\)가 없다. 즉 도핑과 무관하게 열평형·비축퇴 볼츠만 근사에서는 <span class="term">질량 작용 법칙</span><span class="en">(Mass-action law)</span> \(np = n_i^2\)이 성립한다. 전자를 늘리면 정공은 그만큼 줄어든다. 늘어난 전자가 정공과 더 자주 만나 재결합하기 때문이다. 여기에 <b>전하 중성 조건</b>을 더하면 \(n\)과 \(p\)가 정해진다.</p>
     <div class="formula">$$p + N_d^+ = n + N_a^-, \qquad n = \frac{N_d-N_a}{2} + \sqrt{\left(\frac{N_d-N_a}{2}\right)^2 + n_i^2}, \qquad E_F - E_i = kT\ln\frac{n}{n_i} = -kT\ln\frac{p}{n_i}$$
       <div class="where">완전 이온화 가정. \(N_d - N_a \gg n_i\)이면 \(n \approx N_d - N_a\), \(p = n_i^2/n\). 도너와 억셉터가 함께 있으면 서로 상쇄된다(<b>보상</b>, <span class="en">Compensation</span>). 예: Si에 \(N_d = 10^{16}\)이면 \(E_F - E_i = 0.0259\ln(10^{16}/1.07\times10^{10}) \approx 0.36\) eV.</div>
     </div>
@@ -339,7 +339,7 @@
       <li>캐리어 분포 = 상태 밀도 × 점유 확률: \(n(E) = g_c(E)f(E)\), \(p(E) = g_v(E)[1-f(E)]\). 캐리어는 밴드 끝 \(kT\) 근처에 몰려 있다.</li>
       <li>비축퇴이면 \(n = N_ce^{-(E_c-E_F)/kT}\), \(p = N_ve^{-(E_F-E_v)/kT}\). \(E_F\)가 60 meV(300 K) 움직이면 농도는 10배 바뀐다.</li>
       <li>\(n_i = \sqrt{N_cN_v}e^{-E_g/2kT}\): Si 300 K ≈ 1.07×10¹⁰ cm⁻³(이 책). 갭과 온도에 지수적으로 민감하다.</li>
-      <li>얕은 도너·억셉터(Si에서 ~45 meV)는 상온에서 거의 다 이온화된다. 열평형에서는 언제나 \(np = n_i^2\).</li>
+      <li>얕은 도너·억셉터(Si에서 ~45 meV)는 상온에서 거의 다 이온화된다. 열평형·비축퇴 볼츠만 근사에서는 \(np = n_i^2\).</li>
       <li>\(E_F - E_i = kT\ln(n/n_i)\). 보상 도핑에서는 순 도핑 \(|N_d - N_a|\)가 다수 캐리어를 정한다.</li>
       <li>온도에 따라 동결 → 외인성(\(n\approx N_d\)) → 진성(\(n\approx n_i\)). 소자 동작 온도 범위는 외인성 영역의 폭이 정한다.</li>
       <li>도핑이 \(N_c\)에 가까우면 축퇴: \(E_F\)가 밴드 안으로 들어가고 \(\mathcal F_{1/2}\)이 필요하다. \(N_c\)가 작은 GaAs는 더 쉽게 축퇴된다.</li>

@@ -52,7 +52,7 @@
   <header class="chapter-hero">
     <div class="eyebrow">Chapter 04</div>
     <h1>생성과 재결합</h1>
-    <p class="lead">반도체 속 전자–정공 쌍은 끊임없이 태어나고 사라진다. 열 평형에서는 그 둘이 정확히 같아서 \(np = n_i^2\)가 유지된다. 빛을 비추거나 접합으로 캐리어를 주입해 이 균형을 깨면, 여분의 캐리어는 정해진 시간 — <span class="term">수명</span><span class="en">(Lifetime)</span> — 안에 재결합하며 평형으로 돌아간다. 수명이 길면 캐리어는 멀리까지 확산해 태양 전지가 효율적이고, 수명이 짧으면 다이오드가 빨리 꺼진다. LED는 재결합에서 빛을 얻고, 메모리와 이미지 센서는 생성 전류(누설)와 싸운다. 이 장에서는 캐리어가 어떤 경로로 재결합하는지, 그리고 수명·확산 길이·표면이 소자에 어떻게 나타나는지 본다.</p>
+    <p class="lead">반도체 속 전자–정공 쌍은 끊임없이 태어나고 사라진다. 열평형에서는 생성과 재결합이 같고, 비축퇴 볼츠만 근사에서 \(np = n_i^2\)가 유지된다. 빛을 비추거나 접합으로 캐리어를 주입해 이 균형을 깨면, 여분의 캐리어는 정해진 시간 — <span class="term">수명</span><span class="en">(Lifetime)</span> — 안에 재결합하며 평형으로 돌아간다. 수명이 길면 캐리어는 멀리까지 확산해 태양 전지가 효율적이고, 수명이 짧으면 다이오드가 빨리 꺼진다. LED는 재결합에서 빛을 얻고, 메모리와 이미지 센서는 생성 전류(누설)와 싸운다. 이 장에서는 캐리어가 어떤 경로로 재결합하는지, 그리고 수명·확산 길이·표면이 소자에 어떻게 나타나는지 본다.</p>
     <ul class="objectives">
       <li>평형의 생성–재결합 균형과 저준위 주입을 이해한다.</li>
       <li>직접(복사) 재결합, 트랩을 거치는 SRH 재결합, 오제 재결합의 식과 지배 조건을 안다.</li>
@@ -65,7 +65,7 @@
 
   <section id="balance">
     <h2>평형: 생성 = 재결합</h2>
-    <p>온도가 0 K가 아니면 격자 진동이 가끔 가전자대의 전자를 전도대로 올린다. 이것이 <span class="term">열 생성</span><span class="en">(Thermal generation)</span> \(G_{th}\)이다. 반대로 전도대 전자가 정공을 만나 에너지를 내놓고 사라지는 것이 <span class="term">재결합</span><span class="en">(Recombination)</span> \(R\)이다. 재결합은 전자와 정공이 만나야 하므로 대략 \(np\)에 비례한다. 평형에서는 \(R_0 = G_{th}\)이고, 그 결과가 질량 작용 법칙 \(n_0p_0 = n_i^2\)다.</p>
+    <p>온도가 0 K가 아니면 격자 진동이 가끔 가전자대의 전자를 전도대로 올린다. 이것이 <span class="term">열 생성</span><span class="en">(Thermal generation)</span> \(G_{th}\)이다. 반대로 전도대 전자가 정공을 만나 에너지를 내놓고 사라지는 것이 <span class="term">재결합</span><span class="en">(Recombination)</span> \(R\)이다. 재결합은 전자와 정공이 만나야 하므로 대략 \(np\)에 비례한다. 평형에서는 \(R_0 = G_{th}\)이고, 비축퇴 조건에서 그 결과가 질량 작용 법칙 \(n_0p_0 = n_i^2\)다.</p>
     <p>빛이나 주입으로 과잉 캐리어 \(\Delta n = \Delta p\)가 생기면 \(np > n_i^2\)가 되어 재결합이 생성보다 많아진다. 알짜 재결합률 \(U = R - G_{th}\)가 시스템을 평형으로 되돌린다. 반대로 공핍층처럼 \(np < n_i^2\)이면 \(U < 0\), 즉 알짜 <em>생성</em>이 일어난다(누설 전류의 원인).</p>
     <div class="formula">$$n = n_0 + \Delta n,\quad p = p_0 + \Delta p,\qquad \text{저준위 주입}:\ \Delta n = \Delta p \ll n_0 + p_0$$
       <div class="where"><span class="term">저준위 주입</span><span class="en">(Low-level injection)</span>에서는 다수 캐리어 농도가 거의 그대로이고 소수 캐리어만 크게 변한다. 예: p형 \(N_A = 10^{16}\)에 \(\Delta n = 10^{13}\)을 주입하면 정공은 0.1% 늘지만 전자는 \(10^4 \to 10^{13}\)으로 10억 배 늘어난다. 그래서 재결합률은 소수 캐리어 농도로 정해지고 \(U \approx \Delta n/\tau_n\)으로 쓸 수 있다.</div>
@@ -144,7 +144,7 @@
         <div class="stat"><span class="k">유효 수명 Δn/U</span><span class="v" id="sr-o-t">—</span></div>
         <div class="stat"><span class="k">관측 횟수 a · b · c · d</span><span class="v" id="sr-o-c" style="font-size:15px">—</span></div>
       </div>
-      <div class="sim-note">밴드 그림의 E<sub>t</sub> 선이나 U 그래프를 드래그해 트랩 준위를 옮길 수 있다. 트랩 10개가 각각 네 과정을 확률적으로 겪는다(상대 속도는 SRH 식 그대로, 전체 속도만 보기 좋게 늦춤). 오른쪽(아래) 그래프는 트랩 준위에 따른 U(로그 축). 해볼 것: ① E<sub>t</sub>를 중간갭에서 E<sub>c</sub> 쪽으로 끌어올리면(이 조건에서는 약 0.35 eV 이상) (b) 전자 방출이 급증하고, 포획한 전자가 정공을 만나기 전에 도로 나가 U가 지수적으로 줄어든다. ② Δn을 10⁸까지 낮추면 np ≈ n<sub>i</sub>²에 가까워 (a)≈(b), (c)≈(d) — 평형의 상세 균형. ③ σ<sub>n</sub>/σ<sub>p</sub>를 바꾸면 U의 봉우리가 중간갭에서 조금 비켜난다. 기준 수명 √(τ<sub>n</sub>τ<sub>p</sub>) = 1 µs, Si 300 K.</div>
+      <div class="sim-note">밴드 그림의 E<sub>t</sub> 선이나 U 그래프를 드래그해 트랩 준위를 옮길 수 있다. 트랩 10개가 각각 네 과정을 확률적으로 겪는다(상대 속도는 SRH 식 그대로, 전체 속도만 보기 좋게 늦춤). 오른쪽(아래) 그래프는 트랩 준위에 따른 U(로그 축). 해볼 것: ① E<sub>t</sub>를 중간갭에서 E<sub>c</sub> 쪽으로 끌어올리면(이 조건에서는 약 0.35 eV 이상) (b) 전자 방출이 급증하고, 포획한 전자가 정공을 만나기 전에 도로 나가 U가 지수적으로 줄어든다. ② Δn = 10⁸은 기본 p형 도핑 10¹⁶에서 저준위 주입이지만, 평형 소수 농도 약 1.1×10⁴보다 커 상세 균형은 아니다. (a)≈(b), (c)≈(d)를 함께 만족하려면 Δn이 평형 소수 농도보다도 훨씬 작아야 한다. ③ σ<sub>n</sub>/σ<sub>p</sub>를 바꾸면 U의 봉우리가 중간갭에서 조금 비켜난다. 기준 수명 √(τ<sub>n</sub>τ<sub>p</sub>) = 1 µs, Si 300 K.</div>
     </div>
     <figure class="diagram">
       <svg viewBox="0 0 780 220" role="img" aria-label="SRH의 네 과정">
@@ -322,8 +322,8 @@
     <h2>헤인스–쇼클리 실험</h2>
     <p>1949년 헤인스와 쇼클리는 소수 캐리어가 실제로 드리프트하고 확산한다는 것을 눈으로 보여 주었다. 전기장 \(E\)가 걸린 n형 막대의 한 점에 짧은 펄스로 정공을 주입하면, 정공 덩어리는 \(\mu_pE\)로 움직이면서(드리프트) 넓게 퍼지고(확산) 줄어든다(재결합). 거리 \(d\)만큼 떨어진 수집 전극에서 시간에 따른 신호를 보면 세 가지를 모두 읽어 낼 수 있다.</p>
     <div class="formula">$$\Delta p(x,t) = \frac{N}{\sqrt{4\pi D_p t}}\exp\!\left[-\frac{(x - \mu_pEt)^2}{4D_pt}\right]e^{-t/\tau_p}$$
-      $$\mu_p = \frac{d}{E\,t_0},\qquad D_p = \frac{(\mu_pE)^2\,(\Delta t)^2}{16\,\ln 2\;t_0}$$
-      <div class="where">\(t_0\): 신호가 최대인 시각, \(\Delta t\): 신호의 반치폭(FWHM, 시간). 공간 반치폭 \(4\sqrt{D t_0\ln 2}\)를 속도 \(\mu_pE\)로 나눈 것이 \(\Delta t\)라는 데서 나온다. 펄스의 넓이를 서로 다른 \(d\)(또는 \(E\))에서 비교하면 \(\tau_p\)도 구할 수 있다.</div>
+      $$\mu_p \approx \frac{d}{E\,t_0},\qquad D_p \approx \frac{(\mu_pE)^2\,(\Delta t)^2}{16\,\ln 2\;t_0}$$
+      <div class="where">\(t_0\): 신호가 최대인 시각. 아래 추출식은 긴 수명·좁은 펄스의 근사다. 정확한 첨두는 \([(\mu E)^2+4D/\tau]t_0^2+2Dt_0-d^2=0\)을 만족하므로 일반적으로 \(d/(\mu E)\)보다 이르다. \(\Delta t\): 신호의 반치폭(FWHM, 시간). 공간 반치폭 \(4\sqrt{D t_0\ln 2}\)를 속도 \(\mu_pE\)로 나눈 것이 \(\Delta t\)라는 데서 나온다. 펄스의 넓이를 서로 다른 \(d\)(또는 \(E\))에서 비교하면 \(\tau_p\)도 구할 수 있다.</div>
     </div>
 
     <div class="sim" id="sim-hs">
@@ -332,7 +332,7 @@
         <div class="sim-view"><canvas id="hs-cv"></canvas></div>
         <div class="sim-controls">
           <p class="goal" id="hs-goal">목표: 신호의 첨두 시각 t₀와 반치폭 Δt를 커서로 재서 정공 이동도 μ<sub>p</sub>(±8%)와 확산 계수 D<sub>p</sub>(±20%)를 맞힌다.</p>
-          <label class="ctrl"><span>전기장 E <output id="hs-e-out"></output></span><input type="range" id="hs-e" min="5" max="60" step="0.5" value="10"></label>
+          <label class="ctrl"><span>전기장 E <output id="hs-e-out"></output></span><input type="range" id="hs-e" min="15" max="60" step="0.5" value="20"></label>
           <label class="check"><input type="checkbox" id="hs-z"> 시간 축 확대 (t₀ 커서 ±20 µs)</label>
           <div class="btn-row"><button class="btn sm primary" id="hs-fire">펄스 주입</button><button class="btn sm" id="hs-new">새 시료</button></div>
           <label class="ctrl"><span><span>내 답 μ<sub>p</sub> (cm²/V·s)</span></span><input type="number" id="hs-mu" min="1" step="1" placeholder="예: 400"></label>
@@ -346,7 +346,7 @@
         <div class="stat"><span class="k">반치폭 Δt = |t₂ − t₁|</span><span class="v" id="hs-o-w">—</span></div>
         <div class="stat"><span class="k">기록</span><span class="v" id="hs-o-s">—</span></div>
       </div>
-      <div class="sim-note">오실로스코프 그래프를 드래그하면 가장 가까운 커서가 움직인다. 위: n형 Si 막대(길이 0.8 cm)에서 정공 덩어리가 오른쪽으로 드리프트하며 퍼지고 옅어진다. 아래: 수집 전극(d = 0.5 cm)의 신호. 커서 세 개(보라: t₀, 청록: t₁·t₂)를 각각 첨두와 반값 지점에 맞춘다. 요령: ① 전기장이 약하면 펄스가 200 µs 창 안에 도착하지 않는다. ② 전기장을 키우면 도착이 빨라지고 재결합 손실도 줄지만 폭이 좁아져 읽기 어려워진다 — '확대'를 켜자. ③ 계산: μ<sub>p</sub> = d/(E t₀), D<sub>p</sub> = (μ<sub>p</sub>E)²(Δt)²/(16 ln2 · t₀). 맞히고 나면 D/μ가 kT/q ≈ 0.0259 V인지 확인해 보자.</div>
+      <div class="sim-note">오실로스코프 그래프를 드래그하면 가장 가까운 커서가 움직인다. 위: n형 Si 막대(길이 0.8 cm)에서 정공 덩어리가 오른쪽으로 드리프트하며 퍼지고 옅어진다. 아래: 수집 전극(d = 0.5 cm)의 신호. 커서 세 개(보라: t₀, 청록: t₁·t₂)를 각각 첨두와 반값 지점에 맞춘다. 요령: ① 전기장이 약하면 펄스가 200 µs 창 안에 도착하지 않는다. ② 전기장을 키우면 도착이 빨라지고 재결합 손실도 줄지만 폭이 좁아져 읽기 어려워진다 — '확대'를 켜자. ③ 긴 수명·좁은 펄스 근사로 계산: μ<sub>p</sub> ≈ d/(E t₀), D<sub>p</sub> ≈ (μ<sub>p</sub>E)²(Δt)²/(16 ln2 · t₀). 이 미션은 첨두 이동의 체계적 오차를 줄이도록 E ≥ 15 V/cm로 제한한다. 약한 전기장·짧은 수명에서는 전체 신호를 적합해야 한다. 맞히고 나면 D/μ가 kT/q ≈ 0.0259 V인지 확인해 보자.</div>
     </div>
   </section>
 
@@ -374,20 +374,20 @@
         <div class="stat"><span class="k">E<sub>i</sub> − E<sub>Fp</sub></span><span class="v" id="qf-o-p">—</span></div>
         <div class="stat"><span class="k">분리 E<sub>Fn</sub> − E<sub>Fp</sub></span><span class="v" id="qf-o-s">—</span></div>
       </div>
-      <div class="sim-note">오른쪽(아래) 그래프를 드래그하면 광생성률이 바뀐다. 정상 상태 G = U(Δn)을 SRH(중간갭)·복사·오제로 풀었다(Si, 300 K). 왼쪽(위): 밴드와 준페르미 준위, 내리쬐는 광자와 생성되는 쌍. 오른쪽(아래): 광생성률에 따른 E<sub>Fn</sub>, E<sub>Fp</sub>(E<sub>i</sub> 기준). 해볼 것: ① n형에 약한 빛(G ~ 10¹⁶)을 비추면 E<sub>Fn</sub>은 거의 그대로이고 소수 캐리어의 E<sub>Fp</sub>만 크게 내려온다(저준위 주입). ② 태양광 한 개 정도(Si 흡수 평균 G ~ 10¹⁹~10²⁰)에서 분리가 약 0.6~0.7 eV — 실리콘 태양 전지 V<sub>oc</sub>의 크기다. ③ 수명을 10배 늘리면 분리가 kT·ln10 ≈ 60 meV 커진다. ④ 아주 강한 빛에서는 두 준위가 E<sub>i</sub>에 대칭으로 벌어지고(고준위), 오제가 분리를 제한한다.</div>
+      <div class="sim-note">오른쪽(아래) 그래프를 드래그하면 광생성률이 바뀐다. 정상 상태 G = U(Δn)을 SRH(중간갭)·복사·오제로 풀었다(Si, 300 K). 왼쪽(위): 밴드와 준페르미 준위, 내리쬐는 광자와 생성되는 쌍. 오른쪽(아래): 광생성률에 따른 E<sub>Fn</sub>, E<sub>Fp</sub>(E<sub>i</sub> 기준). 해볼 것: ① n형에 약한 빛(G ~ 10¹⁶)을 비추면 E<sub>Fn</sub>은 거의 그대로이고 소수 캐리어의 E<sub>Fp</sub>만 크게 내려온다(저준위 주입). ② 태양광 한 개 정도(Si 흡수 평균 G ~ 10¹⁹~10²⁰)에서 분리가 약 0.6~0.7 eV — 실리콘 태양 전지 V<sub>oc</sub>의 크기다. ③ 일정 생성률·저준위 주입·SRH 지배에서 수명을 10배 늘리면 분리가 kT·ln10 ≈ 60 meV 커진다. 고준위 SRH 지배에서는 약 120 meV, 복사·오제 지배에서는 훨씬 작은 변화가 될 수 있다. ④ 아주 강한 빛에서는 두 준위가 E<sub>i</sub>에 대칭으로 벌어지고(고준위), 오제가 분리를 제한한다.</div>
     </div>
   </section>
 
   <section class="keypoints" id="summary">
     <h2>핵심 정리</h2>
     <ol>
-      <li>평형에서 생성 = 재결합, \(np = n_i^2\). 과잉 캐리어가 있으면 알짜 재결합 \(U\)가 평형으로 되돌린다. 저준위 주입에서 \(U = \Delta n/\tau\).</li>
+      <li>비축퇴 열평형에서 생성 = 재결합, \(np = n_i^2\). 과잉 캐리어가 있으면 알짜 재결합 \(U\)가 평형으로 되돌린다. 저준위 주입에서 \(U = \Delta n/\tau\).</li>
       <li>직접(복사): \(U = B(np - n_i^2)\). GaAs의 B는 Si보다 약 10⁵배 크다(직접 갭).</li>
       <li>SRH: \(U = (np - n_i^2)/[\tau_p(n + n_1) + \tau_n(p + p_1)]\). 중간갭 트랩이 가장 효과적이다. 간접 갭 Si의 수명을 정한다.</li>
       <li>오제: \(U \propto n^2p\), 수명 \(\propto 1/N^2\). 고농도에서 지배한다. 수명의 역수는 더해진다.</li>
       <li>연속 방정식 + 드리프트–확산 → 소수 캐리어 확산 방정식. 정상 상태 해는 \(e^{-x/L}\), \(L = \sqrt{D\tau}\).</li>
       <li>표면 재결합 속도 \(S\): 0이면 반사, ∞면 \(\Delta p = 0\). 산화막·Al₂O₃·SiNₓ·수소 패시베이션이 S를 낮춘다.</li>
-      <li>헤인스–쇼클리: 첨두 시각으로 \(\mu = d/(Et_0)\), 반치폭으로 \(D\)를 잰다. 둘의 비가 \(kT/q\)다.</li>
+      <li>헤인스–쇼클리: 긴 수명·좁은 펄스 근사에서 첨두 시각으로 \(\mu \approx d/(Et_0)\), 반치폭으로 \(D\)를 잰다. 둘의 비가 \(kT/q\)다.</li>
       <li>빛을 받으면 \(E_F\)가 \(E_{Fn}\)과 \(E_{Fp}\)로 갈라지고 \(np = n_i^2 e^{(E_{Fn} - E_{Fp})/kT}\). 저준위에서는 소수 캐리어 쪽만 크게 움직인다.</li>
     </ol>
   </section>

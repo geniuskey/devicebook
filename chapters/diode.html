@@ -217,7 +217,7 @@
       <li><b>공핍층 재결합 (n ≈ 2).</b> 공핍층 한가운데에서는 \(n = p = n_ie^{V/2V_t}\)라 SRH 재결합률이 최대 \(\approx n_ie^{V/2V_t}/2\tau\)다. 이 전류 \(J_{rec} \approx (qn_iW/2\tau)e^{V/2V_t}\)는 \(n_i\)에 비례하므로(확산 전류는 \(n_i^2\)) 낮은 전압·짧은 수명·넓은 밴드갭에서 지배한다. 역바이어스에서는 같은 메커니즘이 생성 전류 \(qn_iW/2\tau\)로 누설을 키운다.</li>
       <li><b>고주입 (n ≈ 2).</b> 주입된 정공이 \(N_D\)에 가까워지면 전하 중성을 위해 다수 전자도 같이 늘고, 준페르미 준위 간격의 절반씩만 소수 캐리어 농도에 쓰여 \(p_n(x_n) \approx n_ie^{V/2V_t}\)가 된다.</li>
       <li><b>직렬 저항.</b> 중성 영역·접촉 저항 \(R_s\)에서 \(IR_s\)만큼 전압이 빠져 \(V_j = V - IR_s\). 수십 mA 이상에서 곡선이 오른쪽으로 눕는다.</li>
-      <li><b>온도.</b> \(I_0 \propto T^{3+\gamma/2}e^{-E_g/kT}\)라 온도가 오르면 \(I_0\)가 폭증한다. 일정 전류에서 \(dV_F/dT \approx -(E_g/q - V_F + 3V_t)/T \approx -2\) mV/K. 다이오드를 온도계로 쓰는 원리이자, 칩 온도 센서(밴드갭 기준 전압)의 기초다.</li>
+      <li><b>온도.</b> \(I_0 \propto T^{3+\gamma/2}e^{-E_g/kT}\)라 온도가 오르면 \(I_0\)가 폭증한다. 밴드갭을 고정하고 전지수 인자를 T³로 근사한 일정 전류 조건에서 \(dV_F/dT \approx -(E_g/q - V_F + 3V_t)/T \approx -2\) mV/K. 다이오드를 온도계로 쓰는 원리이자, 칩 온도 센서(밴드갭 기준 전압)의 기초다.</li>
     </ul>
     <div class="sim" id="sim-iv">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>다이오드 I–V 실험실: 성분 분해, 직렬 저항, 온도, 수치 해</h3></div>
@@ -269,7 +269,7 @@
     <h2>소신호 모델: 컨덕턴스와 확산 용량</h2>
     <p>순방향 동작점 \(I_D\)에 작은 신호 \(v\)를 얹으면 다이오드는 저항과 커패시터의 조합처럼 보인다. 전류는 전압에 지수로 반응하므로 소신호 컨덕턴스는 전류에 비례한다. 또 중성 영역에 쌓인 소수 캐리어 전하 \(Q = \tau_T I_D\)가 전압에 따라 바뀌므로 커패시터처럼 행동한다. 이것이 <span class="term">확산 용량</span><span class="en">(Diffusion capacitance)</span>이다.</p>
     <div class="formula">$$g_d = \frac{dI}{dV} = \frac{I_D}{nV_t}, \quad r_d = \frac{nV_t}{I_D}\ \ (\text{1 mA에서 } 26\ \Omega), \qquad C_d = \frac{dQ}{dV} = \frac{\tau_T I_D}{V_t}$$
-      <div class="where">\(\tau_T\): 저장 시간 상수. 긴 다이오드 \(\tau_T = \tau_p\)(저주파 소신호에서는 분포 효과로 \(\tau_p/2\)), 짧은 다이오드 \(\tau_T = W_n^2/2D_p\)(통과 시간). 1 mA, τ = 1 µs면 \(C_d \approx 39\) nF — 접합 용량(pF)보다 수천 배 크다. 순방향에서는 \(C_d\), 역방향에서는 \(C_j\)가 지배한다.</div>
+      <div class="where">확산 용량 식은 이상 계수 n = 1인 저주입 확산 전류의 저장 전하 미분이며, 재결합 전류의 n = 2를 같은 식에 자동 적용하지 않는다. \(\tau_T\): 저장 시간 상수. 긴 다이오드 \(\tau_T = \tau_p\)(저주파 소신호에서는 분포 효과로 \(\tau_p/2\)), 짧은 다이오드 \(\tau_T = W_n^2/2D_p\)(통과 시간). 1 mA, τ = 1 µs면 \(C_d \approx 39\) nF — 접합 용량(pF)보다 수천 배 크다. 순방향에서는 \(C_d\), 역방향에서는 \(C_j\)가 지배한다.</div>
     </div>
     <figure class="diagram">
       <svg viewBox="0 0 620 200" role="img" aria-label="다이오드 소신호 등가 회로">
@@ -282,7 +282,7 @@
         <circle cx="590" cy="100" r="4" class="f-acc"/><text x="590" y="88" text-anchor="middle" class="lbl-dim">K (n)</text>
         <text x="380" y="190" text-anchor="middle" class="lbl-dim">순방향: g_d, C_d가 지배 · 역방향: g_d ≈ 0, C_j만 남는다</text>
       </svg>
-      <figcaption><b>그림 6-3.</b> 다이오드 소신호 등가 회로. 확산 용량과 접합 용량은 병렬이다. \(r_d\)와 \(C_d\)의 곱은 \(\tau_T\)로 동작점과 무관하다 — 다이오드의 주파수 한계가 저장 시간으로 정해진다는 뜻이다. I–V 실험실의 커서 읽기값에서 직접 확인할 수 있다.</figcaption>
+      <figcaption><b>그림 6-3.</b> 다이오드 소신호 등가 회로. 확산 용량과 접합 용량은 병렬이다. n = 1의 저주입·확산 지배·직렬 저항 없는 접합에서 같은 저장 전하 정의를 쓰면 \(r_dC_d=\tau_T\)다. 일반식 \(r_d=nV_t/I\)와 \(C_d=\tau_TI/V_t\)의 곱은 \(n\tau_T\)다. 실험실의 단자 미분 저항과 저장 전하 용량은 직렬 저항·고주입·재결합을 켜면 이 단순 곱으로 비교할 수 없다.</figcaption>
     </figure>
   </section>
 
@@ -785,7 +785,7 @@
       for (V = -0.5; V <= 1.0001; V += 0.01) {
         var r = I(V, p), Id = r.c.Jd * AREA, Ig = r.c.Jg * AREA;
         tot.push([V, log ? Math.abs(r.I) : r.I * 1e3]);
-        var cj = Jj(V, p);
+        var cj = r.c; // same solved junction voltage as the total
         dif.push([V, log ? Math.abs(cj.Jd * AREA) : cj.Jd * AREA * 1e3]); if (p.gr) gr.push([V, log ? Math.abs(cj.Jg * AREA) : cj.Jg * AREA * 1e3]);
       }
       opt = log ? { x: [-0.5, 1.0], y: [1e-15, 1], logY: true } : { x: [-0.5, 1.0], y: [-2, 40] };

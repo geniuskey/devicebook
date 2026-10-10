@@ -336,7 +336,7 @@
         <div class="stat"><span class="k">정공 (가전자대)</span><span class="v" id="ho-o-h">—</span></div>
         <div class="stat"><span class="k">재결합 횟수</span><span class="v" id="ho-o-r">0</span></div>
       </div>
-      <div class="sim-note">위: 2차원으로 펼친 공유 결합(선 하나에 전자 2개). 아래: 같은 장면의 밴드 그림. 전기장이 오른쪽을 가리키면 전자(음전하)는 왼쪽으로 가고, 이웃 결합 전자가 왼쪽으로 한 칸씩 빈자리를 메우므로 <b>빈자리는 오른쪽, 즉 양전하처럼</b> 움직인다. 정공의 이동이 느린 것은 결합 사이를 건너뛰어야 하기 때문이다(Si: μₚ ≈ 470 &lt; μₙ ≈ 1420 cm²/V·s). 자유 전자가 빈자리를 만나면 재결합하여 둘 다 사라진다.</div>
+      <div class="sim-note">위: 2차원으로 펼친 공유 결합(선 하나에 전자 2개). 아래: 같은 장면의 밴드 그림. 전기장이 오른쪽을 가리키면 전자(음전하)는 왼쪽으로 가고, 이웃 결합 전자가 왼쪽으로 한 칸씩 빈자리를 메우므로 <b>빈자리는 오른쪽, 즉 양전하처럼</b> 움직인다. 결합 그림은 정공의 전하 부호를 보여 주는 비유다. 실제 밴드 수송의 이동도 차이는 유효 질량과 산란에 의한 운동량 완화시간으로 정해진다(Si, 저도핑·300 K의 대표값: μₚ ≈ 470 &lt; μₙ ≈ 1420 cm²/V·s). 자유 전자가 빈자리를 만나면 재결합하여 둘 다 사라진다.</div>
     </div>
   </section>
 
@@ -391,7 +391,7 @@
         <div class="stat"><span class="k">dE<sub>g</sub>/dT</span><span class="v" id="eg-o-d">—</span></div>
         <div class="stat"><span class="k">0 K 대비</span><span class="v" id="eg-o-r">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① GaAs LED(약 870 nm)를 뜨겁게 하면 빛이 장파장 쪽으로 이동한다(약 0.3 nm/K). ② GaN·SiC의 한계 파장은 자외선이다. 가시광을 흡수하지 않아 투명하고, 갭이 커서 고온·고전압 전력 소자에 쓰인다. ③ 저온(4 K)에서는 곡선이 평평하다. T² 항이 주도하기 때문이다.</div>
+      <div class="sim-note">해볼 것: ① GaAs LED(약 870 nm)를 뜨겁게 하면 빛이 장파장 쪽으로 이동한다(약 0.3 nm/K). ② GaN·SiC의 한계 파장은 자외선이다. 가시광을 흡수하지 않아 투명하고, 갭이 커서 고온·고전압 전력 소자에 쓰인다. ③ β &gt; 0인 재료는 T ≪ β인 저온에서 T² 항이 주도해 곡선이 평평해진다. 이 책의 4H-SiC는 β = 0인 선형 근사이므로 같은 저온 극한을 따르지 않는다.</div>
     </div>
     <div class="table-wrap">
       <table>
@@ -880,9 +880,21 @@
         const n = Math.max(1, Math.ceil(x / Math.PI - 1e-9));
         pts.push({ e, x, fv, ok: Math.abs(fv) <= 1, n });
       }
-      // 띠 경계
+      // Repulsive delta barriers: each upper edge is exactly n² E₁.
+      // Solve the lower edge rather than mistaking an energy-grid step for a gap.
       const bands = [];
-      pts.forEach((p) => { if (!p.ok) return; let b = bands[p.n - 1]; if (!b) b = bands[p.n - 1] = { lo: p.e, hi: p.e }; b.lo = Math.min(b.lo, p.e); b.hi = Math.max(b.hi, p.e); });
+      for (let n = 1; n * n <= EMAX; n++) {
+        let lo = (n - 1) * Math.PI, hi = n * Math.PI;
+        if (P > 0) {
+          lo += 1e-8;
+          const target = n % 2 ? 1 : -1;
+          for (let k = 0; k < 60; k++) {
+            const mid = (lo + hi) / 2;
+            if ((f(mid, P) - target) * target > 0) lo = mid; else hi = mid;
+          }
+        } else hi = lo;
+        bands.push({ lo: Math.pow((lo + hi) / (2 * Math.PI), 2), hi: n * n });
+      }
       return { pts, bands };
     }
     const cv = PB.canvas("#kp-cv", (ctx, w, h) => {
@@ -946,7 +958,7 @@
       PB.stat("kp-o-g2", g2 > 1e-3 ? small((g2 * E1).toFixed(2), "eV") : "0 (닫힘)");
       // 바닥 곡률: E(k) ≈ E0 + c k² → m/m* = c (ε = k² 이 자유 전자)
       if (B1) {
-        const p0 = pts.find((p) => p.n === 1 && p.ok), e0 = p0.e;
+        const e0 = B1.lo;
         const p1 = pts.find((p) => p.n === 1 && p.ok && p.e > e0 + 0.02 * (B1.hi - B1.lo) + 0.002);
         if (p1) { const kr = Math.acos(PB.clamp(p1.fv, -1, 1)) / Math.PI; const c = (p1.e - e0) / (kr * kr); PB.stat("kp-o-m", small((1 / c).toFixed(2), "")); }
       }

@@ -136,7 +136,7 @@
           <text x="160" y="246" text-anchor="middle" class="lbl-dim">광자 + 포논의 2차 과정 → 약한 흡수</text>
         </g>
       </svg>
-      <figcaption><b>그림 12-1.</b> 직접·간접 밴드갭의 흡수. 간접 반도체에서도 광자 에너지가 충분히 크면(Si는 약 3.4 eV 이상) 직접 전이가 가능해져 흡수 계수가 10⁶ cm⁻¹까지 치솟는다. 같은 이유로 간접 반도체는 빛을 잘 내지 못한다. Si LED가 없는 이유다.</figcaption>
+      <figcaption><b>그림 12-1.</b> 직접·간접 밴드갭의 흡수. 간접 반도체에서도 광자 에너지가 충분히 크면(Si는 약 3.4 eV 이상) 직접 전이가 가능해져 흡수 계수가 10⁶ cm⁻¹까지 치솟는다. 같은 이유로 간접 반도체는 빛을 잘 내지 못한다. Si LED도 존재하지만 간접 갭의 낮은 복사 효율 때문에 일반 광원에서는 직접 갭 재료보다 불리하다.</figcaption>
     </figure>
     <p>빛의 세기는 깊이에 따라 지수적으로 줄고(<span class="term">비어–람베르트 법칙</span><span class="en">(Beer–Lambert law)</span>), 사라진 광자 하나하나가 전자–정공 쌍 하나가 된다. 따라서 표면에 들어온 광자 플럭스 \(\Phi_0\)(광자/cm²·s)로 깊이별 <span class="term">광생성률</span><span class="en">(Optical generation rate)</span>을 바로 쓸 수 있다.</p>
     <div class="formula">$$\Phi(x) = \Phi_0\,e^{-\alpha x}, \qquad G(x) = -\frac{d\Phi}{dx} = \alpha\,\Phi_0\,e^{-\alpha x}\quad [\text{cm}^{-3}\text{s}^{-1}], \qquad \Phi_0 = \frac{(1-R)\,P_{opt}}{h\nu}$$
@@ -415,7 +415,7 @@
       </svg>
       <figcaption><b>그림 12-5.</b> 빛과 전자의 세 가지 상호작용과 반도체 레이저의 공진기. 반도체 결정의 벽개면 자체가 굴절률 차이로 약 30%를 반사하는 거울이 된다.</figcaption>
     </figure>
-    <p>반도체에서 '위 준위'는 전도대의 전자, '아래 준위'는 가전자대의 빈자리(정공)다. 주입으로 준페르미 준위가 갈라질 때, 에너지 \(h\nu\)인 광자에 대해 유도 방출이 흡수보다 많아질 조건은 1961년 버나드와 뒤라푸르가 보였다.</p>
+    <p>반도체에서 비교하는 위·아래 준위는 전도대와 가전자대의 전자 상태 점유 fc·fv다. 유도 방출은 fc(1−fv), 흡수는 fv(1−fc)에 비례하므로 순이득에는 fc &gt; fv가 필요하다. 정공 점유 fh = 1−fv를 쓰면 fc+fh &gt; 1이다. 주입으로 준페르미 준위가 갈라질 때, 에너지 \(h\nu\)인 광자에 대해 유도 방출이 흡수보다 많아질 조건은 1961년 버나드와 뒤라푸르가 보였다.</p>
     <div class="formula">$$E_g < h\nu < E_{Fn} - E_{Fp} \qquad (\text{버나드–뒤라푸르 조건})$$
       $$g_{th} = \alpha_i + \frac{1}{2L}\ln\frac{1}{R_1R_2}, \qquad P_{out} = \eta_d\,\frac{h\nu}{q}\,(I - I_{th}), \qquad \eta_d = \eta_i\,\frac{\alpha_m}{\alpha_i+\alpha_m}$$
       <div class="where">이득이 문턱 이득 \(g_{th}\)(내부 손실 \(\alpha_i\) + 거울 손실 \(\alpha_m\))에 이르면 발진한다. 문턱을 넘으면 캐리어 농도와 \(E_{Fn}-E_{Fp}\)가 고정(클램핑)되고, 더 넣은 전류는 거의 모두 유도 방출 광자가 된다. 문턱 전류는 온도에 따라 \(I_{th}\propto e^{T/T_0}\)로 늘어난다(\(T_0\)는 InGaAsP 약 50~70 K, GaAs 양자 우물 약 100~150 K).</div>
